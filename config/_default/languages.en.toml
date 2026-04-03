@@ -1,0 +1,12 @@
+title = "Miguel Côrte"
+
+[params.author]
+  name = "Miguel Côrte"
+  image = "img/author.jpg"
+  headline = "Engineering Leadership & Automation Advocate"
+  bio = "I help companies grow smarter through AI agents, workflow automation, and observability. 8+ years building software, 4+ years managing cross-functional teams — now advising businesses on turning complexity into competitive advantage."
+  links = [
+    { linkedin = "https://linkedin.com/in/miguelgoncalvesc" },
+    { email = "mailto:hello@mcorte.com" },
+    { github = "https://github.com/miguelgoncalvesc" }
+  ]

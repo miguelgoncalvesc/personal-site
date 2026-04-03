@@ -1,0 +1,490 @@
+/* ============================================
+   Custom Styles — Miguel Côrte Personal Site
+   LinkedIn banner palette: periwinkle blue #6B7DD8
+   ============================================ */
+
+/* --- Theme-aware color variables --- */
+:root {
+  --accent:           #6B7DD8;      /* periwinkle blue — banner primary */
+  --accent-dark:      #5567C8;      /* slightly deeper for hover states */
+  --accent-subtle:    rgba(107, 125, 216, 0.10);
+  --accent-border:    rgba(107, 125, 216, 0.25);
+
+  --custom-text-primary:   rgba(0, 0, 0, 0.85);
+  --custom-text-secondary: rgba(0, 0, 0, 0.60);
+  --custom-text-muted:     rgba(0, 0, 0, 0.45);
+  --custom-border:         rgba(0, 0, 0, 0.10);
+  --custom-bg-subtle:      rgba(107, 125, 216, 0.04);
+  --custom-card-bg:        linear-gradient(135deg, rgba(107, 125, 216, 0.05) 0%, rgba(107, 125, 216, 0.02) 100%);
+  --custom-card-border:    rgba(107, 125, 216, 0.15);
+}
+
+.dark {
+  --accent:           #8B9BE8;      /* lighter periwinkle for dark bg */
+  --accent-dark:      #6B7DD8;
+  --accent-subtle:    rgba(139, 155, 232, 0.10);
+  --accent-border:    rgba(139, 155, 232, 0.22);
+
+  --custom-text-primary:   rgba(255, 255, 255, 0.88);
+  --custom-text-secondary: rgba(255, 255, 255, 0.60);
+  --custom-text-muted:     rgba(255, 255, 255, 0.40);
+  --custom-border:         rgba(255, 255, 255, 0.08);
+  --custom-bg-subtle:      rgba(139, 155, 232, 0.05);
+  --custom-card-bg:        linear-gradient(135deg, rgba(139, 155, 232, 0.07) 0%, rgba(139, 155, 232, 0.02) 100%);
+  --custom-card-border:    rgba(139, 155, 232, 0.12);
+}
+
+/* -------------------------------------------------------
+   LinkedIn-style Experience Cards
+   ------------------------------------------------------- */
+.experience-item {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--custom-border);
+}
+
+.experience-item:last-child {
+  border-bottom: none;
+}
+
+.experience-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--custom-bg-subtle);
+  border: 1px solid var(--custom-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.experience-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.experience-logo .logo-placeholder {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--custom-text-muted);
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.experience-content {
+  flex: 1;
+}
+
+.experience-content h3 {
+  margin: 0 0 0.15rem 0 !important;
+  font-size: 1.05rem !important;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.experience-content .company {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--custom-text-secondary);
+  margin: 0;
+}
+
+.experience-content .dates {
+  font-size: 0.82rem;
+  color: var(--custom-text-muted);
+  margin: 0.15rem 0 0.6rem 0;
+}
+
+.experience-content ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.experience-content ul li {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 0.2rem;
+  color: var(--custom-text-secondary);
+}
+
+/* -------------------------------------------------------
+   Service Offering Cards
+   ------------------------------------------------------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.service-card {
+  background: var(--custom-card-bg);
+  border: 1px solid var(--custom-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card .service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.service-card h3 {
+  font-size: 1.35rem !important;
+  margin: 0 0 0.4rem 0 !important;
+  font-weight: 700;
+}
+
+.service-card .tagline {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.service-card p {
+  color: var(--custom-text-secondary);
+  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.service-card ul {
+  padding-left: 1.1rem;
+  margin: 0.75rem 0;
+}
+
+.service-card ul li {
+  color: var(--custom-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+
+.service-card .ideal-for {
+  background: var(--accent-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--custom-text-muted);
+}
+
+.service-card .ideal-for strong {
+  color: var(--custom-text-secondary);
+}
+
+/* -------------------------------------------------------
+   Projects Grid
+   ------------------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.project-card {
+  background: var(--custom-card-bg);
+  border: 1px solid var(--custom-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+}
+
+.project-card .project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-card h3 {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 700;
+}
+
+.project-card .project-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.project-card .badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}
+
+.project-card .badge.role {
+  background: rgba(110, 231, 160, 0.08);
+  color: var(--accent-dark);
+  border-color: rgba(110, 231, 160, 0.18);
+}
+
+.project-card .badge.year {
+  background: rgba(110, 231, 160, 0.08);
+  color: var(--accent);
+  border-color: rgba(110, 231, 160, 0.18);
+}
+
+.project-card p {
+  color: var(--custom-text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.project-card .impact {
+  background: var(--accent-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+
+.project-card .impact p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--custom-text-secondary);
+}
+
+.project-card .tech-stack {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.project-card .tech-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--custom-bg-subtle);
+  color: var(--custom-text-muted);
+  border: 1px solid var(--custom-border);
+}
+
+/* -------------------------------------------------------
+   Stats / Numbers Row
+   ------------------------------------------------------- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.25rem;
+  background: var(--custom-bg-subtle);
+  border-radius: 12px;
+  border: 1px solid var(--custom-border);
+}
+
+.stat-item .stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  background-image: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1.2;
+}
+
+.stat-item .stat-label {
+  font-size: 0.82rem;
+  color: var(--custom-text-muted);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* -------------------------------------------------------
+   CTA Section
+   ------------------------------------------------------- */
+.cta-section {
+  background: linear-gradient(135deg, var(--accent-subtle) 0%, rgba(110, 231, 160, 0.05) 100%);
+  border: 1px solid var(--accent-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  margin: 3rem 0 1rem 0;
+}
+
+.cta-section h2 {
+  margin: 0 0 0.5rem 0 !important;
+  font-size: 1.5rem !important;
+}
+
+.cta-section p {
+  color: var(--custom-text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -------------------------------------------------------
+   Blog Post Cards
+   ------------------------------------------------------- */
+.article-link--card {
+  background: var(--custom-card-bg);
+  border: 1px solid var(--custom-card-border) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.article-link--card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.article-link--card:hover {
+  border-color: var(--accent-border) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.article-link--card:hover::before {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------
+   Blog Coming Soon Banner
+   ------------------------------------------------------- */
+.blog-coming-soon {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, var(--accent-subtle) 0%, rgba(110, 231, 160, 0.04) 100%);
+  border: 1px solid var(--accent-border);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0 2.5rem 0;
+}
+
+.blog-coming-soon .bcs-icon {
+  font-size: 2.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.blog-coming-soon .bcs-body h3 {
+  margin: 0 0 0.3rem 0 !important;
+  font-size: 1.2rem !important;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.blog-coming-soon .bcs-body p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--custom-text-secondary);
+  line-height: 1.5;
+}
+
+/* -------------------------------------------------------
+   Responsive
+   ------------------------------------------------------- */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .experience-item {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .experience-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 1.25rem;
+  }
+
+  .project-card {
+    padding: 1.25rem;
+  }
+
+  .blog-coming-soon {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+}

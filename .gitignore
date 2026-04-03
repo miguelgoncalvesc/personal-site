@@ -1,0 +1,25 @@
+# Hugo build output (regenerate with: hugo)
+/public/
+
+# Hugo resource cache (image processing, etc.)
+/resources/
+
+# Hugo lock file (optional; some setups use it)
+.hugo_build.lock
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Local env (secrets, machine-specific)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log

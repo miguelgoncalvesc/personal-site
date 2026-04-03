@@ -1,0 +1,17 @@
+# Hugo Site Configuration
+baseURL = "https://mcorte.com"
+languageCode = "en"
+title = "Miguel Côrte"
+theme = "blowfish"
+
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 0
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  author = "authors"

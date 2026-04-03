@@ -1,0 +1,22 @@
+# Main Navigation Menu
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 10
+
+[[main]]
+  name = "Blog"
+  pageRef = "posts"
+  weight = 20
+
+[[main]]
+  name = "My Focus"
+  pageRef = "projects"
+  weight = 30
+
+# Footer Menu
+
+[[footer]]
+  name = "Privacy"
+  url = "#"
