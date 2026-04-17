@@ -1,6 +1,6 @@
 <script>
   (function () {
-    var measurementId = {{ site.Config.Services.GoogleAnalytics.ID | jsonify }};
+    var measurementId = {{ site.Config.Services.GoogleAnalytics.ID }};
     if (!measurementId) return;
 
     var consentKey = "mcorte-cookie-consent";

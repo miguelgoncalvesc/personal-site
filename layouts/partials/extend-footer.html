@@ -1,13 +1,16 @@
 {{ if site.Config.Services.GoogleAnalytics.ID }}
   <div id="cookie-banner" class="cookie-banner" hidden>
-    <div class="cookie-banner__content">
-      <p class="cookie-banner__text">
-        This site uses analytics cookies to understand visits and improve the experience.
-        <a href="{{ "/privacy/" | relURL }}">Privacy Policy</a>
-      </p>
-      <div class="cookie-banner__actions">
-        <button id="cookie-banner-reject" type="button" class="cookie-banner__button cookie-banner__button--secondary">Reject</button>
-        <button id="cookie-banner-accept" type="button" class="cookie-banner__button cookie-banner__button--primary">Accept</button>
+    <div class="cookie-banner__dialog" role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title">
+      <div class="cookie-banner__content">
+        <h2 id="cookie-banner-title" class="cookie-banner__title">Cookies</h2>
+        <p class="cookie-banner__text">
+          This site uses analytics cookies to understand visits and improve the experience.
+          <a href="{{ "/privacy/" | relURL }}">Privacy Policy</a>
+        </p>
+        <div class="cookie-banner__actions">
+          <button id="cookie-banner-reject" type="button" class="cookie-banner__button cookie-banner__button--secondary">Reject</button>
+          <button id="cookie-banner-accept" type="button" class="cookie-banner__button cookie-banner__button--primary">Accept</button>
+        </div>
       </div>
     </div>
   </div>
@@ -24,16 +27,20 @@
       if (!banner || !acceptButton || !rejectButton) return;
       if (consentApi.get()) return;
 
+      document.body.appendChild(banner);
       banner.hidden = false;
+      document.body.classList.add("cookie-consent-open");
 
       acceptButton.addEventListener("click", function () {
         consentApi.accept();
         banner.hidden = true;
+        document.body.classList.remove("cookie-consent-open");
       });
 
       rejectButton.addEventListener("click", function () {
         consentApi.reject();
         banner.hidden = true;
+        document.body.classList.remove("cookie-consent-open");
       });
     })();
   </script>
