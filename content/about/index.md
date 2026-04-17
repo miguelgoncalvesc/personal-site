@@ -29,7 +29,7 @@ showPagination: false
   </div>
 </div>
 
-I’m Miguel Côrte – an **Engineering Leadership & Automation Advocate** helping teams turn complexity into competitive advantage. I design and implement **AI-driven workflows, automated systems, and observability platforms** that improve reliability, **scale engineering teams**, and drive strategic impact. I’m passionate about building high-performing teams and leveraging AI to solve real-world business challenges.
+I’m Miguel Côrte – a **Technical Advisor & Automation Advocate** helping teams turn complexity into competitive advantage. I design and implement **AI-driven workflows, automated systems, and observability platforms** that improve reliability, **scale engineering teams**, and drive strategic impact. I’m passionate about building high-performing teams and leveraging AI to solve real-world business challenges.
 
 ---
 

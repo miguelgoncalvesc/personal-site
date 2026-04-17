@@ -9,6 +9,12 @@
   --accent-dark:      #5567C8;      /* slightly deeper for hover states */
   --accent-subtle:    rgba(107, 125, 216, 0.10);
   --accent-border:    rgba(107, 125, 216, 0.25);
+  --glass-surface:    linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.28) 100%);
+  --glass-surface-strong: rgba(255, 255, 255, 0.62);
+  --glass-border:     rgba(255, 255, 255, 0.68);
+  --glass-shadow:     0 18px 48px rgba(126, 153, 201, 0.14);
+  --glass-shadow-soft: 0 10px 30px rgba(126, 153, 201, 0.10);
+  --glass-blur:       24px;
 
   --custom-text-primary:   rgba(0, 0, 0, 0.85);
   --custom-text-secondary: rgba(0, 0, 0, 0.60);
@@ -24,14 +30,141 @@
   --accent-dark:      #6B7DD8;
   --accent-subtle:    rgba(139, 155, 232, 0.10);
   --accent-border:    rgba(139, 155, 232, 0.22);
+  --glass-surface:    linear-gradient(135deg, rgba(26, 31, 39, 0.76) 0%, rgba(18, 22, 29, 0.58) 100%);
+  --glass-surface-strong: rgba(18, 22, 29, 0.72);
+  --glass-border:     rgba(255, 255, 255, 0.10);
+  --glass-shadow:     0 18px 48px rgba(0, 0, 0, 0.34);
+  --glass-shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.24);
 
-  --custom-text-primary:   rgba(255, 255, 255, 0.88);
-  --custom-text-secondary: rgba(255, 255, 255, 0.60);
-  --custom-text-muted:     rgba(255, 255, 255, 0.40);
+  --custom-text-primary:   rgba(255, 255, 255, 0.94);
+  --custom-text-secondary: rgba(255, 255, 255, 0.78);
+  --custom-text-muted:     rgba(255, 255, 255, 0.56);
   --custom-border:         rgba(255, 255, 255, 0.08);
   --custom-bg-subtle:      rgba(139, 155, 232, 0.05);
   --custom-card-bg:        linear-gradient(135deg, rgba(139, 155, 232, 0.07) 0%, rgba(139, 155, 232, 0.02) 100%);
   --custom-card-border:    rgba(139, 155, 232, 0.12);
+}
+
+:root {
+  --adm-important-border: #9dc4ef;
+  --adm-important-bg: #eef6ff;
+  --adm-important-text: #27496b;
+}
+
+html.dark {
+  --adm-important-border: rgba(210, 220, 232, 0.56);
+  --adm-important-bg: rgba(214, 221, 230, 0.14);
+  --adm-important-text: #eef3f8;
+}
+
+html {
+  background: #ffffff;
+  background-attachment: fixed;
+  background-color: #ffffff;
+}
+
+html.dark {
+  background: linear-gradient(180deg, #232b36 0%, #111822 100%);
+  background-attachment: fixed;
+  background-color: #111822;
+}
+
+body {
+  background: transparent !important;
+  color: var(--custom-text-primary);
+}
+
+html::before {
+  content: none;
+}
+
+.article-link--card,
+.service-card,
+.project-card,
+.author,
+.admonition,
+.highlight-wrapper,
+#site-footer,
+#menu-blur {
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.home-glass-shell {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#menu-blur {
+  box-shadow: none !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.56) 0%, rgba(241, 246, 255, 0.34) 100%) !important;
+}
+
+.dark #menu-blur {
+  background: linear-gradient(135deg, rgba(18, 22, 29, 0.82) 0%, rgba(14, 18, 24, 0.64) 100%) !important;
+}
+
+#site-footer {
+  margin-top: 2rem;
+  border-radius: 28px;
+  padding: 1.5rem;
+}
+
+.highlight-wrapper {
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: var(--glass-shadow-soft);
+}
+
+.author {
+  border-radius: 24px;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--accent-subtle) 0%, rgba(110, 231, 160, 0.05) 100%) !important;
+  border: 1px solid var(--accent-border) !important;
+  box-shadow: none !important;
+}
+
+.admonition {
+  box-shadow: var(--glass-shadow-soft);
+}
+
+.admonition[data-type="important"] {
+  border-left-width: 6px;
+  background: #eef6ff !important;
+  border-color: #9dc4ef !important;
+  color: #27496b !important;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06) !important;
+}
+
+.dark .admonition[data-type="important"] {
+  background: rgba(214, 221, 230, 0.14) !important;
+  border-color: rgba(210, 220, 232, 0.56) !important;
+  color: #eef3f8 !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+#TableOfContents a.active,
+.toc a.active {
+  color: #2f4f73 !important;
+  opacity: 1 !important;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.dark #TableOfContents a.active,
+.dark .toc a.active {
+  color: #f5f7fa !important;
+  opacity: 1 !important;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* -------------------------------------------------------
@@ -147,7 +280,7 @@
 .service-card:hover {
   border-color: var(--accent-border);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--glass-shadow);
 }
 
 .service-card:hover::before {
@@ -226,7 +359,7 @@
 
 .project-card:hover {
   border-color: var(--accent-border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--glass-shadow);
 }
 
 .project-card .project-header {
@@ -325,20 +458,25 @@
 .stat-item {
   text-align: center;
   padding: 1.25rem;
-  background: var(--custom-bg-subtle);
-  border-radius: 12px;
-  border: 1px solid var(--custom-border);
+  background: var(--custom-card-bg);
+  border: 1px solid var(--custom-card-border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
 }
 
 .stat-item .stat-number {
   font-size: 2rem;
   font-weight: 800;
-  background-image: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background-image: linear-gradient(135deg, #5b7c9f, #2f4f73);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: block;
   line-height: 1.2;
+}
+
+.dark .stat-item .stat-number {
+  background-image: linear-gradient(135deg, #c7d8ea, #88a6c7);
 }
 
 .stat-item .stat-label {
@@ -401,7 +539,7 @@
 .article-link--card:hover {
   border-color: var(--accent-border) !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--glass-shadow);
 }
 
 .article-link--card:hover::before {
@@ -440,6 +578,61 @@
   font-size: 0.92rem;
   color: var(--custom-text-secondary);
   line-height: 1.5;
+}
+
+/* -------------------------------------------------------
+   Floating Navbar (on scroll)
+   ------------------------------------------------------- */
+
+/* Wrapper shifts position only — NO overflow:hidden, which would
+   clip the mobile menu and search modal that live inside it. */
+.fixed.inset-x-0,
+div[class*="fixed"][class*="inset-x-0"] {
+  transition:
+    top   0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    left  0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile first: near-full-width so name + search + dark/light + hamburger all fit */
+.nav-floating {
+  left:  2rem !important;
+  right: 2rem !important;
+  top:   0.65rem !important;
+}
+
+/* Tablet: a bit of breathing room */
+@media (min-width: 640px) {
+  .nav-floating {
+    left:  1rem !important;
+    right: 1rem !important;
+  }
+}
+
+/* Desktop: full floating pill effect */
+@media (min-width: 1024px) {
+  .nav-floating {
+    left:  8rem !important;
+    right: 8rem !important;
+  }
+  .nav-floating > div {
+    padding: 0 3rem !important;
+  }
+}
+
+/* #menu-blur becomes the visible pill — border-radius clips its
+   own background to the rounded shape without affecting siblings. */
+#menu-blur {
+  transition:
+    border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow    0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-floating #menu-blur {
+  border-radius: 28px !important;
+  background:    var(--glass-surface) !important;
+  box-shadow:    var(--glass-shadow), inset 0 0 0 1px var(--glass-border) !important;
+  opacity:       1 !important;
 }
 
 /* -------------------------------------------------------

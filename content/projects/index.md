@@ -1,5 +1,5 @@
 ---
-title: "My Focus"
+title: "Focus"
 description: "AI automation, observability, and high-impact engineering — highlights from 8+ years helping companies grow smarter."
 showDate: false
 showReadingTime: false
@@ -47,4 +47,3 @@ Get in Touch →
 {{< /button >}}
 
 </div>
-

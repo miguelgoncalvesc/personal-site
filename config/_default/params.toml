@@ -3,10 +3,12 @@
 # --- Global ---
 colorScheme = "noir"
 defaultAppearance = "dark"
-autoSwitchAppearance = true
+autoSwitchAppearance = false
 enableSearch = true
 enableCodeCopy = true
 enableScrollToTop = true
+mainSections = ["posts"]
+smartTOC = true
 
 # --- Header ---
 [header]
@@ -23,7 +25,6 @@ enableScrollToTop = true
 # --- Homepage ---
 [homepage]
   layout = "background"
-  homepageImage = "img/porto.jpg"
   showRecent = true
   showRecentItems = 3
   showMoreLink = true

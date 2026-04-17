@@ -2,3 +2,38 @@
 {{ if $customCSS }}
   <style>{{ $customCSS.Content | safeCSS }}</style>
 {{ end }}
+
+<script>
+  (function () {
+    var SCROLL_THRESHOLD = 60;
+    var header = null;
+
+    function onScroll() {
+      if (!header) return;
+      if (window.scrollY > SCROLL_THRESHOLD) {
+        header.classList.add("nav-floating");
+      } else {
+        header.classList.remove("nav-floating");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // The fixed header wrapper is the direct parent of #menu-blur
+      var blur = document.getElementById("menu-blur");
+      if (blur) {
+        header = blur.parentElement; // the "fixed inset-x-0 z-100" div
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll(); // run once on load in case page is already scrolled
+    });
+  })();
+</script>
+
+{{ $mermaidLib := resources.Get "lib/mermaid/mermaid.min.js" }}
+{{ $mermaidConfig := resources.Get "js/mermaid.js" | resources.Minify }}
+{{ $mermaidJS := slice $mermaidLib $mermaidConfig | resources.Concat "js/mermaid.bundle.js" | resources.Fingerprint (.Params.fingerprintAlgorithm | default "sha512") }}
+<script
+  defer
+  type="text/javascript"
+  src="{{ $mermaidJS.RelPermalink }}"
+  integrity="{{ $mermaidJS.Data.Integrity }}"></script>
