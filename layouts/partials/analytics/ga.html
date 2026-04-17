@@ -1,0 +1,45 @@
+<script>
+  (function () {
+    var measurementId = {{ site.Config.Services.GoogleAnalytics.ID | jsonify }};
+    if (!measurementId) return;
+
+    var consentKey = "mcorte-cookie-consent";
+
+    function loadAnalytics() {
+      if (window.__mcorteAnalyticsLoaded) return;
+      window.__mcorteAnalyticsLoaded = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () {
+        dataLayer.push(arguments);
+      };
+
+      window.gtag("js", new Date());
+      window.gtag("config", measurementId, {
+        anonymize_ip: true
+      });
+
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
+      document.head.appendChild(script);
+    }
+
+    window.mcorteCookieConsent = {
+      accept: function () {
+        localStorage.setItem(consentKey, "accepted");
+        loadAnalytics();
+      },
+      reject: function () {
+        localStorage.setItem(consentKey, "rejected");
+      },
+      get: function () {
+        return localStorage.getItem(consentKey);
+      }
+    };
+
+    if (window.mcorteCookieConsent.get() === "accepted") {
+      loadAnalytics();
+    }
+  })();
+</script>

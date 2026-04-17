@@ -5,44 +5,47 @@
 
 /* --- Theme-aware color variables --- */
 :root {
-  --accent:           #6B7DD8;      /* periwinkle blue — banner primary */
-  --accent-dark:      #5567C8;      /* slightly deeper for hover states */
-  --accent-subtle:    rgba(107, 125, 216, 0.10);
-  --accent-border:    rgba(107, 125, 216, 0.25);
-  --glass-surface:    linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.28) 100%);
+  --accent: #6B7DD8;
+  /* periwinkle blue — banner primary */
+  --accent-dark: #5567C8;
+  /* slightly deeper for hover states */
+  --accent-subtle: rgba(107, 125, 216, 0.10);
+  --accent-border: rgba(107, 125, 216, 0.25);
+  --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.28) 100%);
   --glass-surface-strong: rgba(255, 255, 255, 0.62);
-  --glass-border:     rgba(255, 255, 255, 0.68);
-  --glass-shadow:     0 18px 48px rgba(126, 153, 201, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.68);
+  --glass-shadow: 0 18px 48px rgba(126, 153, 201, 0.14);
   --glass-shadow-soft: 0 10px 30px rgba(126, 153, 201, 0.10);
-  --glass-blur:       24px;
+  --glass-blur: 24px;
 
-  --custom-text-primary:   rgba(0, 0, 0, 0.85);
+  --custom-text-primary: rgba(0, 0, 0, 0.85);
   --custom-text-secondary: rgba(0, 0, 0, 0.60);
-  --custom-text-muted:     rgba(0, 0, 0, 0.45);
-  --custom-border:         rgba(0, 0, 0, 0.10);
-  --custom-bg-subtle:      rgba(107, 125, 216, 0.04);
-  --custom-card-bg:        linear-gradient(135deg, rgba(107, 125, 216, 0.05) 0%, rgba(107, 125, 216, 0.02) 100%);
-  --custom-card-border:    rgba(107, 125, 216, 0.15);
+  --custom-text-muted: rgba(0, 0, 0, 0.45);
+  --custom-border: rgba(0, 0, 0, 0.10);
+  --custom-bg-subtle: rgba(107, 125, 216, 0.04);
+  --custom-card-bg: linear-gradient(135deg, rgba(107, 125, 216, 0.05) 0%, rgba(107, 125, 216, 0.02) 100%);
+  --custom-card-border: rgba(107, 125, 216, 0.15);
 }
 
 .dark {
-  --accent:           #8B9BE8;      /* lighter periwinkle for dark bg */
-  --accent-dark:      #6B7DD8;
-  --accent-subtle:    rgba(139, 155, 232, 0.10);
-  --accent-border:    rgba(139, 155, 232, 0.22);
-  --glass-surface:    linear-gradient(135deg, rgba(26, 31, 39, 0.76) 0%, rgba(18, 22, 29, 0.58) 100%);
+  --accent: #8B9BE8;
+  /* lighter periwinkle for dark bg */
+  --accent-dark: #6B7DD8;
+  --accent-subtle: rgba(139, 155, 232, 0.10);
+  --accent-border: rgba(139, 155, 232, 0.22);
+  --glass-surface: linear-gradient(135deg, rgba(26, 31, 39, 0.76) 0%, rgba(18, 22, 29, 0.58) 100%);
   --glass-surface-strong: rgba(18, 22, 29, 0.72);
-  --glass-border:     rgba(255, 255, 255, 0.10);
-  --glass-shadow:     0 18px 48px rgba(0, 0, 0, 0.34);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
   --glass-shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.24);
 
-  --custom-text-primary:   rgba(255, 255, 255, 0.94);
+  --custom-text-primary: rgba(255, 255, 255, 0.94);
   --custom-text-secondary: rgba(255, 255, 255, 0.78);
-  --custom-text-muted:     rgba(255, 255, 255, 0.56);
-  --custom-border:         rgba(255, 255, 255, 0.08);
-  --custom-bg-subtle:      rgba(139, 155, 232, 0.05);
-  --custom-card-bg:        linear-gradient(135deg, rgba(139, 155, 232, 0.07) 0%, rgba(139, 155, 232, 0.02) 100%);
-  --custom-card-border:    rgba(139, 155, 232, 0.12);
+  --custom-text-muted: rgba(255, 255, 255, 0.56);
+  --custom-border: rgba(255, 255, 255, 0.08);
+  --custom-bg-subtle: rgba(139, 155, 232, 0.05);
+  --custom-card-bg: linear-gradient(135deg, rgba(139, 155, 232, 0.07) 0%, rgba(139, 155, 232, 0.02) 100%);
+  --custom-card-border: rgba(139, 155, 232, 0.12);
 }
 
 :root {
@@ -589,50 +592,64 @@ html::before {
 .fixed.inset-x-0,
 div[class*="fixed"][class*="inset-x-0"] {
   transition:
-    top   0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    left  0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 
 /* Mobile first: near-full-width so name + search + dark/light + hamburger all fit */
 .nav-floating {
-  left:  2rem !important;
+  left: 2rem !important;
   right: 2rem !important;
-  top:   0.65rem !important;
+  top: 0.65rem !important;
 }
 
 /* Tablet: a bit of breathing room */
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
   .nav-floating {
-    left:  1rem !important;
+    left: 1rem !important;
     right: 1rem !important;
   }
-}
+} */
 
 /* Desktop: full floating pill effect */
 @media (min-width: 1024px) {
   .nav-floating {
-    left:  8rem !important;
-    right: 8rem !important;
+    left: 10% !important;
+    right: 10% !important;
   }
-  .nav-floating > div {
+
+  .nav-floating>div {
     padding: 0 3rem !important;
   }
 }
+
+@media (min-width: 1800px) {
+  .nav-floating {
+    left: 25% !important;
+    right: 25% !important;
+  }
+
+  .nav-floating>div {
+    padding: 0 3rem !important;
+  }
+}
+
 
 /* #menu-blur becomes the visible pill — border-radius clips its
    own background to the rounded shape without affecting siblings. */
 #menu-blur {
   transition:
     border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow    0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-floating #menu-blur {
   border-radius: 28px !important;
-  background:    var(--glass-surface) !important;
-  box-shadow:    var(--glass-shadow), inset 0 0 0 1px var(--glass-border) !important;
-  opacity:       1 !important;
+  background: var(--glass-surface) !important;
+  box-shadow: var(--glass-shadow), inset 0 0 0 1px var(--glass-border) !important;
+  opacity: 1 !important;
 }
 
 /* -------------------------------------------------------
@@ -679,5 +696,89 @@ div[class*="fixed"][class*="inset-x-0"] {
     flex-direction: column;
     text-align: center;
     padding: 1.5rem;
+  }
+}
+
+.cookie-banner {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 120;
+  border-radius: 24px;
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.cookie-banner__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cookie-banner__text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--custom-text-secondary);
+}
+
+.cookie-banner__text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.cookie-banner__button {
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.cookie-banner__button--primary {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: white;
+}
+
+.cookie-banner__button--primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.cookie-banner__button--secondary {
+  background: transparent;
+  border: 1px solid var(--custom-border);
+  color: var(--custom-text-primary);
+}
+
+.cookie-banner__button--secondary:hover {
+  background: var(--custom-bg-subtle);
+}
+
+@media (max-width: 640px) {
+  .cookie-banner__content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cookie-banner__actions {
+    width: 100%;
+  }
+
+  .cookie-banner__button {
+    flex: 1;
   }
 }

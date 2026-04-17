@@ -12,11 +12,11 @@
 
 [[main]]
   name = "Focus"
-  pageRef = "projects"
+  pageRef = "focus"
   weight = 30
 
 # Footer Menu
 
 [[footer]]
   name = "Privacy"
-  url = "#"
+  pageRef = "privacy"

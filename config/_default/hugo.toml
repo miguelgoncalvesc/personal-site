@@ -16,3 +16,8 @@ summaryLength = 0
   tag = "tags"
   category = "categories"
   author = "authors"
+
+[services]
+  [services.googleAnalytics]
+    # Replace with your GA4 Measurement ID, e.g. G-XXXXXXXXXX
+    ID = "G-JV6P3BRQNW"

@@ -1,0 +1,40 @@
+{{ if site.Config.Services.GoogleAnalytics.ID }}
+  <div id="cookie-banner" class="cookie-banner" hidden>
+    <div class="cookie-banner__content">
+      <p class="cookie-banner__text">
+        This site uses analytics cookies to understand visits and improve the experience.
+        <a href="{{ "/privacy/" | relURL }}">Privacy Policy</a>
+      </p>
+      <div class="cookie-banner__actions">
+        <button id="cookie-banner-reject" type="button" class="cookie-banner__button cookie-banner__button--secondary">Reject</button>
+        <button id="cookie-banner-accept" type="button" class="cookie-banner__button cookie-banner__button--primary">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var consentApi = window.mcorteCookieConsent;
+      if (!consentApi) return;
+
+      var banner = document.getElementById("cookie-banner");
+      var acceptButton = document.getElementById("cookie-banner-accept");
+      var rejectButton = document.getElementById("cookie-banner-reject");
+
+      if (!banner || !acceptButton || !rejectButton) return;
+      if (consentApi.get()) return;
+
+      banner.hidden = false;
+
+      acceptButton.addEventListener("click", function () {
+        consentApi.accept();
+        banner.hidden = true;
+      });
+
+      rejectButton.addEventListener("click", function () {
+        consentApi.reject();
+        banner.hidden = true;
+      });
+    })();
+  </script>
+{{ end }}
