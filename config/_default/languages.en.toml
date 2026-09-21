@@ -3,8 +3,8 @@ title = "Miguel Côrte"
 [params.author]
   name = "Miguel Côrte"
   image = "img/author.jpg"
-  headline = "Technical Advisor & Automation Advocate"
-  bio = "Technical Advisor & Automation Advocate helping teams turn complexity into competitive advantage. I design and implement AI-driven workflows, automated systems, and observability platforms that improve reliability, scale engineering teams, and drive strategic impact."
+  headline = "Associate Director of Automation @ Maxima Apparel"
+  bio = "Associate Director of Automation at Maxima Apparel, specializing in AI-driven automation. I work with cross-functional teams across product, operations, and engineering to standardize intelligent automation practices, and I build reliable, observable, and continuously improving systems that turn automation into a core operational practice."
   links = [
     { linkedin = "https://linkedin.com/in/miguelgoncalvesc" },
     { email = "mailto:hello@mcorte.com" },

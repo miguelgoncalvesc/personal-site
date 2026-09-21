@@ -1,6 +1,6 @@
 ---
 title: "About Me"
-description: "Associate Director of Automation with 10+ years in software development, helping companies build AI agents, automate workflows, and implement their observability strategy."
+description: "Associate Director of Automation at Maxima Apparel with 8+ years in software, specializing in AI-driven automation, agent-based workflow orchestration, and observability."
 showDate: false
 showReadingTime: false
 showWordCount: false
@@ -12,7 +12,7 @@ showPagination: false
 
 <div class="stats-row">
   <div class="stat-item">
-    <span class="stat-number">10+</span>
+    <span class="stat-number">8+</span>
     <span class="stat-label">Years in Software</span>
   </div>
   <div class="stat-item">
@@ -29,7 +29,9 @@ showPagination: false
   </div>
 </div>
 
-I’m Miguel Côrte – a **Technical Advisor & Automation Advocate** helping teams turn complexity into competitive advantage. I design and implement **AI-driven workflows, automated systems, and observability platforms** that improve reliability, **scale engineering teams**, and drive strategic impact. I’m passionate about building high-performing teams and leveraging AI to solve real-world business challenges.
+I’m Miguel Côrte – **Associate Director of Automation at Maxima Apparel**, with over eight years of experience in software and a focus on **AI-driven automation**. I collaborate with cross-functional teams across product, operations, and engineering to identify and implement high-impact automation opportunities, and to standardize intelligent automation practices and workflows across **global teams in multiple countries**.
+
+I work directly with executive stakeholders to align scalable solutions with organizational objectives. What motivates me is building **reliable, observable, and continuously improving systems** — and driving the adoption of AI tools and **agent-based workflow orchestration** to turn automation into a core operational practice.
 
 ---
 
@@ -46,8 +48,9 @@ I’m Miguel Côrte – a **Technical Advisor & Automation Advocate** helping te
     <p class="dates">Jan 2026 – Present</p>
     <ul>
       <li>Define and execute the company-wide AI automation strategy, identifying high-impact opportunities and translating them into scalable technical solutions.</li>
-      <li>Lead and coordinate cross-functional technical teams across operations, product, and technology.</li>
-      <li>Oversee implementation of AI/ML tools and workflow orchestration platforms.</li>
+      <li>Collaborate with cross-functional teams across product, operations, and engineering to standardize intelligent automation practices and workflows across global teams in multiple countries.</li>
+      <li>Work directly with executive stakeholders to align scalable automation solutions with organizational objectives.</li>
+      <li>Oversee adoption of AI tools, LLM integrations, and agent-based workflow orchestration platforms.</li>
       <li>Drive a culture of continuous improvement, mentoring engineers on AI-driven development.</li>
     </ul>
   </div>
@@ -220,14 +223,14 @@ I’m Miguel Côrte – a **Technical Advisor & Automation Advocate** helping te
 ### Team & Delivery
 | | |
 |---|---|
-| Agile / Scrum | Stakeholder Alignment |
-| Cross-functional Collaboration | On-Site & Remote-first Teams |
+| Agile / Scrum | Executive Stakeholder Alignment |
+| Cross-functional Collaboration | Global & Remote-first Teams |
 | Team Coaching & Career Development | Hiring & Onboarding |
 
 ### AI & Automation
 | | |
 |---|---|
-| AI Agents & LLM Integration | Workflow Orchestration |
+| AI Agents & LLM Integration | Agent-based Workflow Orchestration |
 | Prompt Engineering | AI-driven Development |
 
 ### Observability & DevOps
