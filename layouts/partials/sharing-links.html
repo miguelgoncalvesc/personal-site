@@ -1,0 +1,100 @@
+{{/* Overrides the theme partial (rendered right after the article body).
+     Adds the post engagement bar (like + "Post on LinkedIn") and comments on
+     posts, then falls back to the theme's sharing links if any are configured. */}}
+{{ if eq .Section "posts" }}
+  {{ $likesEnabled := site.Params.firebase.apiKey }}
+  {{ $linkedin := site.Params.linkedinShare }}
+
+  {{/* Same document id scheme the theme's firebase.js uses for likes */}}
+  {{ $likesId := "" }}
+  {{ with .File }}
+    {{ $path := .Path }}
+    {{ range $.AllTranslations }}
+      {{ $path = replace $path (print "." .Lang ".md") ".md" }}
+    {{ end }}
+    {{ $likesId = print "likes_" $path }}
+  {{ end }}
+
+  {{/* Text pre-filled in the LinkedIn composer */}}
+  {{ $hashtags := slice }}
+  {{ range .Params.tags }}
+    {{ $hashtags = $hashtags | append (print "#" (replaceRE `[^\p{L}\p{N}]` "" .)) }}
+  {{ end }}
+  {{ $lines := slice (.Title | plainify) }}
+  {{ with $linkedin.mention }}{{ $lines = $lines | append (print "by " .) }}{{ end }}
+  {{ $lines = $lines | append .Permalink }}
+  {{ with $hashtags }}{{ $lines = $lines | append (delimit . " ") }}{{ end }}
+  {{ $shareText := delimit $lines "\n\n" }}
+
+  <section class="post-engagement print:hidden" aria-label="Engage with this post">
+    {{ if $likesEnabled }}
+      <button id="button_likes" type="button" class="post-engagement__button" aria-label="Like this post">
+        <span id="button_likes_heart" class="inline-block align-text-bottom" style="display: none"
+          >{{ partial "icon.html" "heart" }}</span
+        >
+        <span id="button_likes_emtpty_heart" class="inline-block align-text-bottom"
+          >{{ partial "icon.html" "heart-empty" }}</span
+        >
+        <span id="button_likes_text">&nbsp;Like</span>
+        <span class="post-engagement__count">
+          <span id="{{ $likesId }}">0</span>
+        </span>
+      </button>
+    {{ end }}
+
+    <a
+      class="post-engagement__button post-engagement__button--linkedin js-linkedin-share"
+      href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}"
+      target="_blank"
+      rel="noopener"
+      data-share-text="{{ $shareText }}">
+      <span class="inline-block align-text-bottom">{{ partial "icon.html" "linkedin" }}</span>
+      <span>&nbsp;Post on LinkedIn</span>
+    </a>
+
+    {{ if site.Params.giscus.repoId }}
+      <a class="post-engagement__button" href="#comments">
+        <span class="inline-block align-text-bottom">{{ partial "icon.html" "comment" }}</span>
+        <span>&nbsp;Comment</span>
+      </a>
+    {{ end }}
+  </section>
+
+  <script>
+    (function () {
+      // LinkedIn's feed accepts ?shareActive=true&text=... and opens the
+      // "Start a post" composer pre-filled. The href above stays as a no-JS fallback.
+      document.querySelectorAll(".js-linkedin-share").forEach(function (link) {
+        link.href =
+          "https://www.linkedin.com/feed/?shareActive=true&text=" +
+          encodeURIComponent(link.getAttribute("data-share-text"));
+      });
+    })();
+  </script>
+
+  {{ partial "post-comments.html" . }}
+{{ end }}
+
+{{/* Theme sharing links (unchanged from themes/blowfish) */}}
+{{ with .Params.sharingLinks | default (.Site.Params.article.sharingLinks | default false) }}
+  {{ $links := site.Data.sharing }}
+  <section class="flex flex-row flex-wrap justify-center pt-4 text-xl">
+    {{ range . }}
+      {{ with index $links . }}
+        {{ $isEmail := eq .icon "email" }}
+        <a
+          class="{{ cond $isEmail "email-link" "" }} m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+          target="_blank"
+          href="{{ cond $isEmail "#" (printf .url $.Permalink $.Title | safeURL) }}"
+          {{ if $isEmail }}
+            data-email="{{ $.Site.Params.Author.email | base64Encode }}"
+            data-subject="{{ replace (printf "Reply to %s" $.Title) "\"" "'" }}"
+          {{ end }}
+          title="{{ i18n .title }}"
+          aria-label="{{ i18n .title }}">
+          {{ partial "icon.html" .icon }}
+        </a>
+      {{ end }}
+    {{ end }}
+  </section>
+{{ end }}

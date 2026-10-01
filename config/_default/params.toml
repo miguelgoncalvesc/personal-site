@@ -93,3 +93,34 @@ smartTOC = true
   groupByYear = false
   cardView = true
   cardViewScreenWidth = false
+
+# --- Post engagement (layouts/partials/sharing-links.html, comments.html) ---
+
+# "Post on LinkedIn" button: opens LinkedIn's composer pre-filled with the
+# post title, this line, the link and the tags as hashtags.
+[linkedinShare]
+  mention = "Miguel Côrte"
+
+# Comments + reactions via giscus (GitHub Discussions). Hidden until repoId and
+# categoryId are set — get both from https://giscus.app after enabling
+# Discussions on the repo and installing the giscus GitHub app.
+[giscus]
+  repo = "miguelgoncalvesc/personal-site"
+  repoId = ""
+  category = "Comments"
+  categoryId = ""
+  lightTheme = "light"
+  darkTheme = "dark_dimmed"
+  lang = "en"
+
+# Anonymous likes (theme's built-in Firestore integration). The like button
+# only renders once apiKey is set. Values come from Firebase console →
+# Project settings → Web app; enable Anonymous auth and Firestore.
+[firebase]
+  apiKey = ""
+  authDomain = ""
+  projectId = ""
+  storageBucket = ""
+  messagingSenderId = ""
+  appId = ""
+  measurementId = ""
