@@ -6,6 +6,7 @@ description: "Jev answers like a form and tells you how sure it is. How it works
 tags: ["AI", "Automation", "Jev", "LLM", "Decision Making", "AI Governance"]
 categories: ["AI & Automation"]
 showTableOfContents: true
+images: ["confidence-not-decision.png"]
 ---
 
 A new AI model launched this month with a promise that sounds almost too good: it can't give you the wrong kind of answer.

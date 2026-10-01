@@ -3,7 +3,6 @@
      posts, then falls back to the theme's sharing links if any are configured. */}}
 {{ if eq .Section "posts" }}
   {{ $likesEnabled := site.Params.firebase.apiKey }}
-  {{ $linkedin := site.Params.linkedinShare }}
 
   {{/* Same document id scheme the theme's firebase.js uses for likes */}}
   {{ $likesId := "" }}
@@ -14,17 +13,6 @@
     {{ end }}
     {{ $likesId = print "likes_" $path }}
   {{ end }}
-
-  {{/* Text pre-filled in the LinkedIn composer */}}
-  {{ $hashtags := slice }}
-  {{ range .Params.tags }}
-    {{ $hashtags = $hashtags | append (print "#" (replaceRE `[^\p{L}\p{N}]` "" .)) }}
-  {{ end }}
-  {{ $lines := slice (.Title | plainify) }}
-  {{ with $linkedin.mention }}{{ $lines = $lines | append (print "by " .) }}{{ end }}
-  {{ $lines = $lines | append .Permalink }}
-  {{ with $hashtags }}{{ $lines = $lines | append (delimit . " ") }}{{ end }}
-  {{ $shareText := delimit $lines "\n\n" }}
 
   <section class="post-engagement print:hidden" aria-label="Engage with this post">
     {{ if $likesEnabled }}
@@ -43,11 +31,10 @@
     {{ end }}
 
     <a
-      class="post-engagement__button post-engagement__button--linkedin js-linkedin-share"
+      class="post-engagement__button post-engagement__button--linkedin"
       href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}"
       target="_blank"
-      rel="noopener"
-      data-share-text="{{ $shareText }}">
+      rel="noopener">
       <span class="inline-block align-text-bottom">{{ partial "icon.html" "linkedin" }}</span>
       <span>&nbsp;Post on LinkedIn</span>
     </a>
@@ -60,17 +47,6 @@
     {{ end }}
   </section>
 
-  <script>
-    (function () {
-      // LinkedIn's feed accepts ?shareActive=true&text=... and opens the
-      // "Start a post" composer pre-filled. The href above stays as a no-JS fallback.
-      document.querySelectorAll(".js-linkedin-share").forEach(function (link) {
-        link.href =
-          "https://www.linkedin.com/feed/?shareActive=true&text=" +
-          encodeURIComponent(link.getAttribute("data-share-text"));
-      });
-    })();
-  </script>
 
   {{ partial "post-comments.html" . }}
 {{ end }}
