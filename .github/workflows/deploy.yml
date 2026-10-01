@@ -40,7 +40,9 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           TZ: Europe/Lisbon
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        # baseURL comes from hugo.toml (https://mcorte.com); the Pages base_url
+        # output is http:// while HTTPS isn't enforced, which leaked into permalinks.
+        run: hugo --minify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

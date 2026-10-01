@@ -8,6 +8,8 @@ enableSearch = true
 enableCodeCopy = true
 enableScrollToTop = true
 mainSections = ["posts"]
+# og:image for pages without a featured image (LinkedIn/Slack link previews)
+defaultSocialImage = "img/porto.jpg"
 smartTOC = true
 
 # --- Header ---
@@ -96,19 +98,14 @@ smartTOC = true
 
 # --- Post engagement (layouts/partials/sharing-links.html, comments.html) ---
 
-# "Post on LinkedIn" button: opens LinkedIn's composer pre-filled with the
-# post title, this line, the link and the tags as hashtags.
-[linkedinShare]
-  mention = "Miguel Côrte"
-
-# Comments + reactions via giscus (GitHub Discussions). Hidden until repoId and
-# categoryId are set — get both from https://giscus.app after enabling
-# Discussions on the repo and installing the giscus GitHub app.
+# Comments + reactions via giscus (GitHub Discussions). Requires the giscus
+# GitHub app installed on the repo: https://github.com/apps/giscus
+# "Announcements" so only giscus/maintainers can open threads.
 [giscus]
   repo = "miguelgoncalvesc/personal-site"
-  repoId = ""
-  category = "Comments"
-  categoryId = ""
+  repoId = "R_kgDOR4_9vQ"
+  category = "Announcements"
+  categoryId = "DIC_kwDOR4_9vc4DG07D"
   lightTheme = "light"
   darkTheme = "dark_dimmed"
   lang = "en"
