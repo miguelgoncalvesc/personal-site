@@ -1,0 +1,54 @@
+{{/* Giscus comments + reactions, backed by GitHub Discussions.
+     Rendered from sharing-links.html, right below the engagement bar.
+     Stays hidden until params.giscus.repoId / categoryId are configured. */}}
+{{ with site.Params.giscus }}
+  {{ if and .repoId .categoryId }}
+    <section id="comments" class="post-comments" aria-label="Comments">
+      <h2 class="post-comments__title">Comments</h2>
+      <div class="giscus"></div>
+    </section>
+
+    <script>
+      (function () {
+        function giscusTheme() {
+          return document.documentElement.classList.contains("dark")
+            ? "{{ .darkTheme | default "dark_dimmed" }}"
+            : "{{ .lightTheme | default "light" }}";
+        }
+
+        var script = document.createElement("script");
+        script.src = "https://giscus.app/client.js";
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        var attrs = {
+          "data-repo": "{{ .repo }}",
+          "data-repo-id": "{{ .repoId }}",
+          "data-category": "{{ .category | default "Comments" }}",
+          "data-category-id": "{{ .categoryId }}",
+          "data-mapping": "pathname",
+          "data-strict": "1",
+          "data-reactions-enabled": "1",
+          "data-emit-metadata": "0",
+          "data-input-position": "top",
+          "data-lang": "{{ .lang | default "en" }}",
+          "data-loading": "lazy",
+          "data-theme": giscusTheme(),
+        };
+        Object.keys(attrs).forEach(function (key) {
+          script.setAttribute(key, attrs[key]);
+        });
+        document.querySelector("#comments .giscus").appendChild(script);
+
+        // Keep the iframe in sync with the site's appearance switcher.
+        new MutationObserver(function () {
+          var frame = document.querySelector("iframe.giscus-frame");
+          if (!frame) return;
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: giscusTheme() } } },
+            "https://giscus.app"
+          );
+        }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+      })();
+    </script>
+  {{ end }}
+{{ end }}

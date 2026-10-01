@@ -805,3 +805,68 @@ body.cookie-consent-open #the-top {
   pointer-events: none;
   user-select: none;
 }
+
+/* --- Post engagement: like, LinkedIn, comments --- */
+.post-engagement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--custom-border);
+}
+
+.post-engagement__button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-subtle);
+  color: var(--custom-text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.post-engagement__button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.post-engagement__button .icon svg {
+  height: 1em;
+  width: 1em;
+}
+
+.post-engagement__button--linkedin {
+  background: #0a66c2;
+  border-color: #0a66c2;
+  color: #fff;
+}
+
+.post-engagement__button--linkedin:hover {
+  background: #004182;
+  border-color: #004182;
+  color: #fff;
+}
+
+.post-engagement__count {
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--accent-border);
+  color: var(--custom-text-secondary);
+}
+
+.post-comments {
+  margin-top: 2.5rem;
+}
+
+.post-comments__title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--custom-text-primary);
+}
