@@ -3,6 +3,10 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches: [main]
+  # Hugo skips future-dated posts at build time, so rebuild daily to publish
+  # posts merged ahead of their date.
+  schedule:
+    - cron: "10 0 * * *"
   workflow_dispatch:
 
 permissions:
