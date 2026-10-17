@@ -8,8 +8,6 @@ enableSearch = true
 enableCodeCopy = true
 enableScrollToTop = true
 mainSections = ["posts"]
-# og:image for pages without a featured image (LinkedIn/Slack link previews)
-defaultSocialImage = "img/porto.jpg"
 smartTOC = true
 
 # --- Header ---
