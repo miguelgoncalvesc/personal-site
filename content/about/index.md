@@ -1,6 +1,6 @@
 ---
 title: "About Me"
-description: "Associate Director of Automation at Maxima Apparel with 8+ years in software, specializing in AI-driven automation, agent-based workflow orchestration, and observability."
+description: "Associate Director of Automation at Maxima Apparel with 9+ years in software, specializing in AI-driven automation, agent-based workflow orchestration, and observability."
 showDate: false
 showReadingTime: false
 showWordCount: false
@@ -12,11 +12,11 @@ showPagination: false
 
 <div class="stats-row">
   <div class="stat-item">
-    <span class="stat-number">8+</span>
+    <span class="stat-number">9+</span>
     <span class="stat-label">Years in Software</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">3+</span>
+    <span class="stat-number">4+</span>
     <span class="stat-label">Years Leading Tech Teams</span>
   </div>
   <div class="stat-item">
@@ -29,7 +29,7 @@ showPagination: false
   </div>
 </div>
 
-I’m Miguel Côrte – **Associate Director of Automation at Maxima Apparel**, with over eight years of experience in software and a focus on **AI-driven automation**. I collaborate with cross-functional teams across product, operations, and engineering to identify and implement high-impact automation opportunities, and to standardize intelligent automation practices and workflows across **global teams in multiple countries**.
+I’m Miguel Côrte – **Associate Director of Automation at Maxima Apparel**, with over nine years of experience in software and a focus on **AI-driven automation**. I collaborate with cross-functional teams across product, operations, and engineering to identify and implement high-impact automation opportunities, and to standardize intelligent automation practices and workflows across **global teams in multiple countries**.
 
 I work directly with executive stakeholders to align scalable solutions with organizational objectives. What motivates me is building **reliable, observable, and continuously improving systems** — and driving the adoption of AI tools and **agent-based workflow orchestration** to turn automation into a core operational practice.
 

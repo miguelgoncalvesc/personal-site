@@ -1,6 +1,6 @@
 ---
 title: "Focus"
-description: "AI automation, observability, and high-impact engineering — highlights from 8+ years helping companies grow smarter."
+description: "AI automation, observability, and high-impact engineering — highlights from 9+ years helping companies grow smarter."
 aliases: ["/projects/"]
 showDate: false
 showReadingTime: false
