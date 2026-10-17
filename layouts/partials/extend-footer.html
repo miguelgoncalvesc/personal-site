@@ -1,3 +1,7 @@
+{{/* Motion (motion.dev, MIT) + site animations */}}
+{{ $motionJS := slice (resources.Get "lib/motion/motion.min.js") (resources.Get "js/site-motion.js" | resources.Minify) | resources.Concat "js/site-motion.bundle.js" | resources.Fingerprint "sha512" }}
+<script src="{{ $motionJS.RelPermalink }}" integrity="{{ $motionJS.Data.Integrity }}"></script>
+
 {{ if site.Config.Services.GoogleAnalytics.ID }}
   <div id="cookie-banner" class="cookie-banner" hidden>
     <div class="cookie-banner__dialog" role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title">

@@ -1,3 +1,16 @@
+<script>
+  // Opt in to motion before first paint; site-motion.js animates from these
+  // states. Fail-safe: show everything if the script never starts.
+  (function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var root = document.documentElement;
+    root.classList.add("motion-ready");
+    setTimeout(function () {
+      if (!window.__siteMotionStarted) root.classList.remove("motion-ready");
+    }, 2500);
+  })();
+</script>
+
 {{ $customCSS := resources.Get "css/custom.css" }}
 {{ if $customCSS }}
   <style>{{ $customCSS.Content | safeCSS }}</style>
