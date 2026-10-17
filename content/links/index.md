@@ -15,14 +15,11 @@ links:
     url: "https://www.linkedin.com/in/miguelgoncalvesc"
     icon: "linkedin"
   - title: "X"
-    url: ""
+    url: "https://x.com/mgoncalvesc"
     icon: "x-twitter"
   - title: "Substack"
     url: ""
     icon: "substack"
-  - title: "GitHub"
-    url: "https://github.com/miguelgoncalvesc"
-    icon: "github"
 # Small icon row under the name
 social:
   - icon: "email"
@@ -32,7 +29,7 @@ social:
     url: "https://www.linkedin.com/in/miguelgoncalvesc"
     label: "LinkedIn"
   - icon: "x-twitter"
-    url: ""
+    url: "https://x.com/mgoncalvesc"
     label: "X"
 sitemap:
   priority: 0.6

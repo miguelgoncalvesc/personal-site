@@ -11,8 +11,8 @@ title = "Miguel Côrte"
     { linkedin = "https://linkedin.com/in/miguelgoncalvesc" },
     { email = "mailto:hello@mcorte.com" },
     { github = "https://github.com/miguelgoncalvesc" },
-    # Add once the profiles exist (icon names from the Blowfish theme):
-    # { x-twitter = "https://x.com/<handle>" },
+    { x-twitter = "https://x.com/mgoncalvesc" },
+    # Add once the profile exists (icon name from the Blowfish theme):
     # { substack = "https://<name>.substack.com" },
     { rss = "/index.xml" }
   ]
