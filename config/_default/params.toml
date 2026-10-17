@@ -1,9 +1,12 @@
 # Blowfish Theme Parameters
 
 # --- Global ---
-colorScheme = "noir"
-defaultAppearance = "dark"
-autoSwitchAppearance = false
+logo = "img/brand/logo-horizontal.svg"
+tagline = "Engineering leadership · Automation · Applied AI"
+disableTextInHeader = true
+colorScheme = "mcorte"
+defaultAppearance = "light"
+autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 enableScrollToTop = true
