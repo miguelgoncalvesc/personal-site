@@ -1,0 +1,45 @@
+{{/* Social preview card (og:image / twitter:image), generated at build time:
+     page title + author on a branded background. Pages that set `images` in
+     front matter or ship a featured, cover or thumbnail image keep theirs. */}}
+{{ $hasOwnImage := .Params.images }}
+{{ range slice "*featured*" "*cover*" "*thumbnail*" }}
+  {{ if $.Resources.GetMatch . }}{{ $hasOwnImage = true }}{{ end }}
+{{ end }}
+
+{{ if not $hasOwnImage }}
+  {{ $bold := resources.Get "og/Inter-Bold.ttf" }}
+  {{ $medium := resources.Get "og/Inter-Medium.ttf" }}
+  {{ $title := .Title | plainify }}
+  {{ if .IsHome }}{{ with site.GetPage "/posts" }}{{ $title = .Description }}{{ end }}{{ end }}
+  {{ $label := cond (eq .Section "posts") "mcorte.com · Blog" "mcorte.com" }}
+
+  {{/* images.Text wraps at the image edge, so break lines here to keep a right margin */}}
+  {{ $lines := slice }}
+  {{ $line := "" }}
+  {{ range split $title " " }}
+    {{ $next := cond (eq $line "") . (print $line " " .) }}
+    {{ if and (gt (len $next) 28) (ne $line "") }}
+      {{ $lines = $lines | append $line }}
+      {{ $line = . }}
+    {{ else }}
+      {{ $line = $next }}
+    {{ end }}
+  {{ end }}
+  {{ $lines = $lines | append $line }}
+  {{ $size := cond (gt (len $lines) 3) 52 64 }}
+
+  {{ $card := resources.Get "og/base.png" | images.Filter
+    (images.Text $label (dict "font" $medium "size" 26 "color" "#8B9BE8" "x" 80 "y" 72))
+    (images.Text (delimit (first 4 $lines) "\n") (dict "font" $bold "size" $size "linespacing" 10 "color" "#F5F7FF" "x" 80 "y" 130))
+    (images.Overlay (resources.Get "og/author.png") 80 498)
+    (images.Text site.Params.author.name (dict "font" $bold "size" 30 "color" "#F5F7FF" "x" 206 "y" 510))
+    (images.Text site.Params.author.headline (dict "font" $medium "size" 22 "color" "#A9B1C8" "x" 206 "y" 554))
+  }}
+  {{ $card = $card | resources.Copy (printf "og/%s.png" (md5 .RelPermalink)) }}
+
+  <meta property="og:image" content="{{ $card.Permalink }}">
+  <meta property="og:image:width" content="{{ $card.Width }}">
+  <meta property="og:image:height" content="{{ $card.Height }}">
+  <meta property="og:image:alt" content="{{ $title }}">
+  <meta name="twitter:image" content="{{ $card.Permalink }}">
+{{ end }}
