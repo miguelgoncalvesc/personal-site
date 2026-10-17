@@ -1,0 +1,23 @@
+{{/* Author photo that follows the appearance: params.author.image (blue
+     background) in light mode, params.author.imageDark (light background) in
+     dark mode. Both are rendered; CSS in custom.css shows the right one.
+     Args: size (px, square), class, alt. */}}
+{{ $size := .size }}
+{{ $variants := slice (dict "src" site.Params.Author.image "mode" "light") }}
+{{ with site.Params.Author.imageDark }}
+  {{ $variants = $variants | append (dict "src" . "mode" "dark") }}
+{{ end }}
+{{ $hasDark := site.Params.Author.imageDark }}
+{{ range $variants }}
+  {{ $mode := .mode }}
+  {{ with resources.Get .src }}
+    {{ $final := .Fill (printf "%dx%d q90" (mul $size 2) (mul $size 2)) }}
+    <img
+      class="{{ $.class }} author-photo{{ if $hasDark }} author-photo--{{ $mode }}{{ end }}"
+      width="{{ $size }}"
+      height="{{ $size }}"
+      alt="{{ $.alt | default site.Params.Author.name }}"
+      src="{{ $final.RelPermalink }}"
+      data-zoom-src="{{ .RelPermalink }}">
+  {{ end }}
+{{ end }}

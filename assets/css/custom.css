@@ -1005,3 +1005,16 @@ body.cookie-consent-open #the-top {
   font-weight: 400;
   letter-spacing: 0;
 }
+
+/* Author photo: blue background in light mode, light background in dark mode */
+.author-photo--dark {
+  display: none !important;
+}
+
+.dark .author-photo--light {
+  display: none !important;
+}
+
+.dark .author-photo--dark {
+  display: inline-block !important;
+}

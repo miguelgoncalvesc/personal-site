@@ -2,30 +2,7 @@
   <div class="relative overflow-hidden">
     <div class="mx-auto max-w-7xl p-0">
       <div class="relative flex flex-col items-center justify-center px-1 py-1 text-center">
-        {{ with .Site.Params.Author.image }}
-          {{ $authorImage := "" }}
-          {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-            {{ $authorImage = resources.GetRemote . }}
-          {{ else }}
-            {{ $authorImage = resources.Get . }}
-          {{ end }}
-          {{ if $authorImage }}
-            {{ $final := $authorImage }}
-            {{ $squareImage := $authorImage }}
-            {{ if not (or ($.Site.Params.disableImageOptimization | default false) (eq $authorImage.MediaType.SubType "svg")) }}
-              {{ $final = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
-              {{ $shortSide := int (math.Min $authorImage.Width $authorImage.Height) }}
-              {{ $squareImage = $authorImage.Crop (printf "%dx%d" $shortSide $shortSide ) }}
-            {{ end }}
-            <img
-              class="mb-2 h-36 w-36 rounded-full ring-4 ring-white/80 dark:ring-white/10"
-              width="144"
-              height="144"
-              alt="{{ $.Site.Params.Author.name | default `Author` }}"
-              src="{{ $final.RelPermalink }}"
-              data-zoom-src="{{ $squareImage.RelPermalink }}">
-          {{ end }}
-        {{ end }}
+        {{ partial "author-photo.html" (dict "size" 144 "class" "mb-2 h-36 w-36 rounded-full ring-4 ring-white/80 dark:ring-white/10") }}
         {{/* Brand lockup: "Miguel" in Fraunces, "Côrte" in blue italic */}}
         {{ $name := .Site.Params.Author.name | default .Site.Title }}
         {{ $parts := split $name " " }}

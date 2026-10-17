@@ -3,6 +3,8 @@ title = "Miguel Côrte"
 [params.author]
   name = "Miguel Côrte"
   image = "img/author.jpg"
+  # Shown when the site is in dark mode (light background reads better on ink)
+  imageDark = "img/author-dark.jpg"
   headline = "Associate Director of Automation @ Maxima Apparel"
   bio = "Associate Director of Automation at Maxima Apparel, specializing in AI-driven automation. I work with cross-functional teams across product, operations, and engineering to standardize intelligent automation practices, and I build reliable, observable, and continuously improving systems that turn automation into a core operational practice."
   links = [
