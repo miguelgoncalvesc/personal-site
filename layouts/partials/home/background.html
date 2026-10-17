@@ -1,40 +1,31 @@
 <article class="home-page prose dark:prose-invert max-w-full">
-  <div class="relative overflow-hidden">
-    <div class="mx-auto max-w-7xl p-0">
+  <div class="home-hero relative overflow-hidden">
+    {{/* Animated node network behind the hero (assets/js/site-motion.js) */}}
+    <canvas class="hero-network" aria-hidden="true"></canvas>
+    <div class="relative mx-auto max-w-7xl p-0">
       <div class="relative flex flex-col items-center justify-center px-1 py-1 text-center">
-        {{ with .Site.Params.Author.image }}
-          {{ $authorImage := "" }}
-          {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-            {{ $authorImage = resources.GetRemote . }}
+        <div data-hero>
+          {{ partial "author-photo.html" (dict "size" 144 "class" "mb-2 h-36 w-36 rounded-full ring-4 ring-white/80 dark:ring-white/10") }}
+        </div>
+        {{/* Brand lockup: "Miguel" in Fraunces, "Côrte" in blue italic */}}
+        {{ $name := .Site.Params.Author.name | default .Site.Title }}
+        {{ $parts := split $name " " }}
+        <h1 data-hero class="home-name mb-2 text-5xl text-neutral-900 dark:text-neutral-100">
+          {{ if gt (len $parts) 1 }}
+            {{ delimit (first (sub (len $parts) 1) $parts) " " }} <em>{{ index $parts (sub (len $parts) 1) }}</em>
           {{ else }}
-            {{ $authorImage = resources.Get . }}
+            {{ $name }}
           {{ end }}
-          {{ if $authorImage }}
-            {{ $final := $authorImage }}
-            {{ $squareImage := $authorImage }}
-            {{ if not (or ($.Site.Params.disableImageOptimization | default false) (eq $authorImage.MediaType.SubType "svg")) }}
-              {{ $final = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
-              {{ $shortSide := int (math.Min $authorImage.Width $authorImage.Height) }}
-              {{ $squareImage = $authorImage.Crop (printf "%dx%d" $shortSide $shortSide ) }}
-            {{ end }}
-            <img
-              class="mb-2 h-36 w-36 rounded-full ring-4 ring-white/80 dark:ring-white/10"
-              width="144"
-              height="144"
-              alt="{{ $.Site.Params.Author.name | default `Author` }}"
-              src="{{ $final.RelPermalink }}"
-              data-zoom-src="{{ $squareImage.RelPermalink }}">
-          {{ end }}
-        {{ end }}
-        <h1 class="mb-2 text-4xl font-extrabold text-neutral-900 dark:text-neutral-100">
-          {{ .Site.Params.Author.name | default .Site.Title }}
         </h1>
         {{ with .Site.Params.Author.headline }}
-          <h2 class="mt-0 mb-0 text-xl text-neutral-700 dark:text-neutral-300">
+          <h2 data-hero class="home-headline mt-0 mb-0 text-lg font-normal text-neutral-600 dark:text-neutral-300">
             {{ . | markdownify }}
           </h2>
         {{ end }}
-        <div class="mt-3 mb-10 text-2xl">
+        {{ with .Site.Params.tagline }}
+          <p data-hero class="brand-eyebrow mt-4 mb-0"><span class="typed" data-text="{{ . }}">{{ . }}</span><span class="typed-caret" aria-hidden="true"></span></p>
+        {{ end }}
+        <div data-hero class="mt-3 mb-10 text-2xl">
           {{ with .Site.Params.Author.links }}
             <div class="flex flex-wrap justify-center">
               {{ range $links := . }}

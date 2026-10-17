@@ -7,18 +7,30 @@
 {{ end }}
 
 {{ if not $hasOwnImage }}
-  {{ $bold := resources.Get "og/Inter-Bold.ttf" }}
-  {{ $medium := resources.Get "og/Inter-Medium.ttf" }}
+  {{/* Layout follows brand kit 04-Redes-y-blog/blog-og-dark (1200×630) */}}
+  {{ $serif := resources.Get "og/Fraunces-Medium.ttf" }}
+  {{ $sans := resources.Get "og/Inter-Regular.ttf" }}
+  {{ $mono := resources.Get "og/JetBrainsMono-Regular.ttf" }}
+  {{ $italic := resources.Get "og/Fraunces-Italic.ttf" }}
   {{ $title := .Title | plainify }}
   {{ if .IsHome }}{{ with site.GetPage "/posts" }}{{ $title = .Description }}{{ end }}{{ end }}
-  {{ $label := cond (eq .Section "posts") "mcorte.com · Blog" "mcorte.com" }}
 
-  {{/* images.Text wraps at the image edge, so break lines here to keep a right margin */}}
+  {{ $meta := "" }}
+  {{ $url := "mcorte.com" }}
+  {{ if eq .Section "posts" }}
+    {{ $url = "mcorte.com/posts" }}
+    {{ if .IsPage }}
+      {{ $meta = printf "%d MIN READ" .ReadingTime }}
+      {{ with .Params.categories }}{{ $meta = printf "%s · %s" (index . 0 | upper) $meta }}{{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* images.Text wraps at the image edge, so break lines here to keep the margins */}}
   {{ $lines := slice }}
   {{ $line := "" }}
   {{ range split $title " " }}
     {{ $next := cond (eq $line "") . (print $line " " .) }}
-    {{ if and (gt (len $next) 28) (ne $line "") }}
+    {{ if and (gt (len $next) 30) (ne $line "") }}
       {{ $lines = $lines | append $line }}
       {{ $line = . }}
     {{ else }}
@@ -26,16 +38,42 @@
     {{ end }}
   {{ end }}
   {{ $lines = $lines | append $line }}
-  {{ $size := cond (gt (len $lines) 3) 52 64 }}
+  {{ $lines = first 3 $lines }}
+  {{ $size := cond (gt (len $lines) 2) 56 66 }}
+  {{ $lh := int (mul $size 1.18) }}
+  {{ $titleY := sub 300 (div (mul $lh (len $lines)) 2) }}
 
-  {{ $card := resources.Get "og/base.png" | images.Filter
-    (images.Text $label (dict "font" $medium "size" 26 "color" "#8B9BE8" "x" 80 "y" 72))
-    (images.Text (delimit (first 4 $lines) "\n") (dict "font" $bold "size" $size "linespacing" 10 "color" "#F5F7FF" "x" 80 "y" 130))
-    (images.Overlay (resources.Get "og/author.png") 80 498)
-    (images.Text site.Params.author.name (dict "font" $bold "size" 30 "color" "#F5F7FF" "x" 206 "y" 510))
-    (images.Text site.Params.author.headline (dict "font" $medium "size" 22 "color" "#A9B1C8" "x" 206 "y" 554))
+  {{ $filters := slice
+    (images.Overlay (resources.Get "og/logo-white.png") 72 66)
+    (images.Text "Engineering leadership · Automation · Applied AI" (dict "font" $sans "size" 18 "color" "#94A3B8" "x" 72 "y" 546))
+    (images.Text $url (dict "font" $mono "size" 18 "color" "#F8FAFC" "x" 1128 "y" 546 "alignx" "right"))
   }}
-  {{ $card = $card | resources.Copy (printf "og/%s.png" (md5 .RelPermalink)) }}
+
+  {{/* Title lines in Fraunces; the last word in blue italic, as in the kit
+       template. Its x comes from the roman face's advance widths
+       (data/og_title_font.json), since images.Text can't mix styles. */}}
+  {{ $font := site.Data.og_title_font }}
+  {{ $last := sub (len $lines) 1 }}
+  {{ range $i, $l := $lines }}
+    {{ $y := add $titleY (mul $i $lh) }}
+    {{ $words := split $l " " }}
+    {{ if and (eq $i $last) (gt (len $words) 1) }}
+      {{ $prefix := print (delimit (first (sub (len $words) 1) $words) " ") " " }}
+      {{ $w := 0 }}
+      {{ range split $prefix "" }}{{ $w = add $w (index $font.widths . | default $font.default) }}{{ end }}
+      {{ $x := add 72 (div (mul $w $size) $font.upm) }}
+      {{ $filters = $filters | append
+        (images.Text $prefix (dict "font" $serif "size" $size "color" "#FFFFFF" "x" 72 "y" $y))
+        (images.Text (index $words (sub (len $words) 1)) (dict "font" $italic "size" $size "color" "#60A5FA" "x" $x "y" $y)) }}
+    {{ else }}
+      {{ $filters = $filters | append (images.Text $l (dict "font" $serif "size" $size "color" "#FFFFFF" "x" 72 "y" $y)) }}
+    {{ end }}
+  {{ end }}
+  {{ with $meta }}
+    {{ $filters = $filters | append (images.Text . (dict "font" $mono "size" 15 "color" "#94A3B8" "x" 1128 "y" 76 "alignx" "right")) }}
+  {{ end }}
+  {{ $card := resources.Get "og/base-dark.png" | images.Filter $filters }}
+  {{ $card = $card | resources.Copy (printf "og/%s-v2.png" (md5 .RelPermalink)) }}
 
   <meta property="og:image" content="{{ $card.Permalink }}">
   <meta property="og:image:width" content="{{ $card.Width }}">
