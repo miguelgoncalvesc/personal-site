@@ -99,6 +99,14 @@ smartTOC = true
 
 # --- Post engagement (layouts/partials/sharing-links.html, comments.html) ---
 
+# "Subscribe" block at the end of every post (layouts/partials/sharing-links.html).
+# Hidden until url is set.
+[subscribe]
+  url = ""   # e.g. "https://<name>.substack.com/subscribe"
+  title = "Get new posts by email"
+  text = "Engineering leadership, automation and applied AI. One email when a new post is out, nothing else."
+  button = "Subscribe on Substack"
+
 # Comments + reactions via giscus (GitHub Discussions). Requires the giscus
 # GitHub app installed on the repo: https://github.com/apps/giscus
 # "Announcements" so only giscus/maintainers can open threads.

@@ -19,8 +19,8 @@
   var scroll = M.scroll;
   var EASE = [0.22, 1, 0.36, 1];
 
-  /* --- Home hero: staggered entrance, then the tagline types itself --- */
-  var heroItems = document.querySelectorAll(".home-hero [data-hero]");
+  /* --- Home hero and /links: staggered entrance, then the tagline types itself --- */
+  var heroItems = document.querySelectorAll(".home-hero [data-hero], [data-links-item]");
   if (heroItems.length) {
     animate(
       heroItems,
@@ -130,7 +130,8 @@
     var LINK = 150;
 
     function palette() {
-      var dark = root.classList.contains("dark");
+      // /links is always on the ink background
+      var dark = root.classList.contains("dark") || root.classList.contains("links-root");
       return {
         node: dark ? "rgba(226,232,240,0.55)" : "rgba(15,23,42,0.4)",
         link: dark ? "226,232,240" : "15,23,42",

@@ -10,5 +10,9 @@ title = "Miguel Côrte"
   links = [
     { linkedin = "https://linkedin.com/in/miguelgoncalvesc" },
     { email = "mailto:hello@mcorte.com" },
-    { github = "https://github.com/miguelgoncalvesc" }
+    { github = "https://github.com/miguelgoncalvesc" },
+    # Add once the profiles exist (icon names from the Blowfish theme):
+    # { x-twitter = "https://x.com/<handle>" },
+    # { substack = "https://<name>.substack.com" },
+    { rss = "/index.xml" }
   ]

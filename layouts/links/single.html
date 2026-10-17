@@ -1,0 +1,103 @@
+{{/* /links — a Linktree-style page on mcorte.com. Standalone (no site header
+     or footer), always on the brand's ink background. Links live in the front
+     matter of content/links/index.md. */}}
+<!doctype html>
+<html
+  lang="{{ site.LanguageCode | default `en` }}"
+  class="links-root"
+  data-default-appearance="dark"
+  data-auto-appearance="false">
+  {{- partial "head.html" . -}}
+  <body class="links-page">
+    <canvas class="hero-network links-network" aria-hidden="true"></canvas>
+
+    <div class="links-topbar">
+      <a class="links-iconbtn" href="{{ "/" | relURL }}" aria-label="mcorte.com home">
+        {{ (resources.Get "img/brand/mark.svg").Content | safeHTML }}
+      </a>
+      <button class="links-iconbtn js-links-share" type="button" aria-label="Share this page">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+        <span class="links-toast" role="status" aria-live="polite"></span>
+      </button>
+    </div>
+
+    <main class="links-main" id="main-content">
+      <header class="links-profile" data-links-item>
+        {{ with resources.Get (site.Params.Author.imageDark | default site.Params.Author.image) }}
+          {{ $img := .Fill "240x240 q90" }}
+          <img class="links-avatar" src="{{ $img.RelPermalink }}" width="120" height="120" alt="{{ site.Params.Author.name }}">
+        {{ end }}
+        <h1 class="links-name">{{ .Params.handle | default site.Params.Author.name }}</h1>
+        <p class="links-tagline">{{ .Params.tagline | default site.Params.tagline }}</p>
+        <div class="links-social">
+          {{ range .Params.social }}
+            {{ if .url }}
+              <a href="{{ .url }}" aria-label="{{ .label }}" {{ if not (hasPrefix .url "mailto:") }}target="_blank" rel="noopener"{{ end }}>
+                {{ partial "icon.html" .icon }}
+              </a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </header>
+
+      <nav class="links-list" aria-label="Links">
+        {{ if .Params.showLatestPost }}
+          {{ with first 1 (where site.RegularPages "Section" "posts") }}
+            {{ range . }}
+              <a class="links-card links-card--featured" href="{{ .RelPermalink }}" data-links-item>
+                <span class="links-card__eyebrow">Latest post</span>
+                <span class="links-card__title">{{ .Title }}</span>
+              </a>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ range .Params.links }}
+          {{ if .url }}
+            {{ $external := hasPrefix .url "http" }}
+            <a class="links-card" href="{{ .url }}" data-links-item {{ if $external }}target="_blank" rel="noopener"{{ end }}>
+              <span class="links-card__icon{{ if eq .icon "brand" }} links-card__icon--brand{{ end }}">
+                {{ if eq .icon "brand" }}
+                  {{ (resources.Get "img/brand/mark.svg").Content | safeHTML }}
+                {{ else }}
+                  {{ partial "icon.html" .icon }}
+                {{ end }}
+              </span>
+              <span class="links-card__label">{{ .title }}</span>
+              <span class="links-card__arrow" aria-hidden="true">→</span>
+            </a>
+          {{ end }}
+        {{ end }}
+      </nav>
+
+      <footer class="links-footer" data-links-item>
+        <a href="{{ "/" | relURL }}">mcorte.com</a>
+        <span>·</span>
+        <a href="{{ "/privacy/" | relURL }}">Privacy</a>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".js-links-share");
+        var toast = btn && btn.querySelector(".links-toast");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          var data = { title: document.title, url: location.href };
+          if (navigator.share) {
+            navigator.share(data).catch(function () {});
+          } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href).then(function () {
+              toast.textContent = "Link copied";
+              setTimeout(function () { toast.textContent = ""; }, 1800);
+            });
+          }
+        });
+      })();
+    </script>
+    {{/* The theme's main.bundle expects these on every page */}}
+    <span id="scroll-to-top" hidden></span>
+    {{ if site.Params.enableSearch | default false }}{{- partial "search.html" . -}}{{ end }}
+    {{- partial "extend-footer.html" . -}}
+  </body>
+</html>
