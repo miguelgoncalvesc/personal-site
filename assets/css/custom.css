@@ -1091,3 +1091,318 @@ body.cookie-consent-open #the-top {
   .hero-network { transition: none; }
   @view-transition { navigation: none; }
 }
+
+/* --- Subscribe block (end of posts) --- */
+.post-subscribe {
+  margin: 2.5rem 0 0;
+  padding: 1.75rem;
+  border: 1px solid var(--custom-border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.post-subscribe .brand-eyebrow {
+  margin: 0 0 0.5rem;
+}
+
+.prose .post-subscribe__title,
+.post-subscribe__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--custom-text-primary);
+}
+
+.post-subscribe__text {
+  margin: 0 0 1.25rem;
+  color: var(--custom-text-secondary);
+}
+
+.prose .post-subscribe__button,
+.post-subscribe__button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.dark .post-subscribe__button {
+  color: var(--brand-ink);
+}
+
+.post-subscribe__button:hover {
+  background: var(--accent-dark);
+}
+
+.home-page h2.home-tagline {
+  font-size: 0.9rem;
+}
+
+.home-page h2.home-tagline {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+/* -------------------------------------------------------
+   /links — Linktree-style page (layouts/links/single.html)
+   Always on Tinta, whatever the site appearance.
+   ------------------------------------------------------- */
+.motion-ready [data-links-item] {
+  opacity: 0;
+}
+
+html.links-root {
+  background: var(--brand-ink);
+}
+
+body.links-page {
+  min-height: 100vh;
+  margin: 0;
+  color: #F1F5F9;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(60rem 40rem at 50% -10%, rgba(96, 165, 250, 0.16), transparent 60%),
+    radial-gradient(40rem 30rem at 100% 100%, rgba(30, 58, 138, 0.35), transparent 70%),
+    var(--brand-ink) !important;
+}
+
+.links-network {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 85%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 85%);
+}
+
+.links-topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.links-iconbtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.12);
+  background: rgba(15, 23, 42, 0.55);
+  color: #FFFFFF;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.links-iconbtn:hover {
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+.links-iconbtn svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.links-iconbtn .brand-accent,
+.links-card__icon--brand .brand-accent {
+  fill: var(--brand-blue-light);
+}
+
+.links-toast {
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: #CBD5E1;
+}
+
+.links-main {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.links-profile {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.links-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.1rem;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px rgba(226, 232, 240, 0.08), 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.links-name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2rem;
+  color: #FFFFFF;
+}
+
+.links-tagline {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.links-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.1rem;
+  font-size: 1.5rem;
+}
+
+.links-social a {
+  color: #E2E8F0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.links-social a:hover {
+  color: var(--brand-blue-light);
+  transform: translateY(-2px);
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.links-card {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  align-items: center;
+  min-height: 4.25rem;
+  padding: 0.6rem;
+  border-radius: 1.1rem;
+  background: var(--brand-panel);
+  color: var(--brand-ink);
+  text-decoration: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.links-card:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.links-card:active {
+  transform: scale(0.99);
+}
+
+.links-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  color: var(--brand-ink);
+}
+
+.links-card__icon--brand {
+  background: var(--brand-ink);
+  color: #FFFFFF;
+}
+
+.links-card__icon--brand svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.links-card__label {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+.links-card__arrow {
+  text-align: center;
+  color: #94A3B8;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.links-card:hover .links-card__arrow {
+  color: var(--brand-blue);
+  transform: translateX(3px);
+}
+
+.links-card--featured {
+  display: block;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(30, 58, 138, 0.35);
+  color: #FFFFFF;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: none;
+}
+
+.links-card--featured:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.links-card__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand-blue-light);
+}
+
+.links-card__title {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.links-footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.links-footer a {
+  color: #94A3B8;
+  text-decoration: none;
+}
+
+.links-footer a:hover {
+  color: #FFFFFF;
+}

@@ -14,6 +14,20 @@
     {{ $likesId = print "likes_" $path }}
   {{ end }}
 
+  {{ with site.Params.subscribe }}
+    {{ if .url }}
+      <aside class="post-subscribe print:hidden" aria-label="Subscribe">
+        <p class="brand-eyebrow">Newsletter</p>
+        <h2 class="post-subscribe__title">{{ .title }}</h2>
+        <p class="post-subscribe__text">{{ .text }}</p>
+        <a class="post-subscribe__button" href="{{ .url }}" target="_blank" rel="noopener">
+          <span class="inline-block align-text-bottom">{{ partial "icon.html" "substack" }}</span>
+          <span>&nbsp;{{ .button }}</span>
+        </a>
+      </aside>
+    {{ end }}
+  {{ end }}
+
   <section class="post-engagement print:hidden" aria-label="Engage with this post">
     {{ if $likesEnabled }}
       <button id="button_likes" type="button" class="post-engagement__button" aria-label="Like this post">
