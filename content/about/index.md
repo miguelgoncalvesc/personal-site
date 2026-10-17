@@ -64,7 +64,7 @@ I work directly with executive stakeholders to align scalable solutions with org
   <div class="experience-content">
     <h3>Technical Lead</h3>
     <p class="company">Critical Manufacturing</p>
-    <p class="dates">Jan 2023 - Feb 2026 · 3 yrs 2 mos</p>
+    <p class="dates">Jan 2023 – Feb 2026 · 3 yrs 2 mos</p>
     <ul>
       <li>Led a cross-functional team of engineers, delivering MES software across automotive, electronics, and semiconductor industries.</li>
       <li>Reduced deployment cycle time by implementing and designing good CI/CD practices and automated testing frameworks.</li>
@@ -82,9 +82,9 @@ I work directly with executive stakeholders to align scalable solutions with org
   <div class="experience-content">
     <h3>Software Engineer</h3>
     <p class="company">Critical Manufacturing</p>
-    <p class="dates">Aug 2021 - Jan 2023 · 1 yr 6 mos</p>
+    <p class="dates">Aug 2021 – Jan 2023 · 1 yr 6 mos</p>
     <ul>
-      <li>Built backend microservices in C#/.NET that processed 500K+ manufacturing events per day, enabling real-time production tracking for well recognized clients.</li>
+      <li>Built backend microservices in C#/.NET that processed 500K+ manufacturing events per day, enabling real-time production tracking for well-recognized clients.</li>
       <li>Integrated MES platform with 100+ industrial IoT devices and external ERP systems (SAP, Oracle), reducing manual data entry by 80% for operations teams.</li>
       <li>Optimized database queries and API performance, cutting average response time and improving end-user satisfaction.</li>
     </ul>
@@ -99,7 +99,7 @@ I work directly with executive stakeholders to align scalable solutions with org
   <div class="experience-content">
     <h3>Graduate Student Researcher</h3>
     <p class="company">BOSCH</p>
-    <p class="dates">Dec 2020 - Aug 2021 · 9 mos</p>
+    <p class="dates">Dec 2020 – Aug 2021 · 9 mos</p>
     <ul>
       <li>Designed real-time building evacuation system using IoT sensors and predictive modeling - achieved route optimization accuracy in simulated emergency scenarios.</li>
       <li>Published research-backed proof-of-concept that reduced estimated evacuation time by 30% compared to traditional static routes.</li>
@@ -115,11 +115,27 @@ I work directly with executive stakeholders to align scalable solutions with org
   <div class="experience-content">
     <h3>Full Stack Engineer</h3>
     <p class="company">ANO Software</p>
-    <p class="dates">Mar 2018 - Dec 2020 · 2 yrs 10 mos</p>
+    <p class="dates">Mar 2018 – Dec 2020 · 2 yrs 10 mos</p>
     <ul>
-      <li>Delivered backend services and ERP modules for portuguese government agencies, supporting 50K+ users processing 2M+ documents annually.</li>
+      <li>Delivered backend services and ERP modules for Portuguese government agencies, supporting 50K+ users processing 2M+ documents annually.</li>
       <li>Rebuilt legacy document management workflows, reducing average processing time and cutting paper usage.</li>
       <li>Mentored junior developers from onboarding to production ownership.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="experience-item">
+  <div class="experience-logo">
+    <!-- <span class="logo-placeholder">CS</span> -->
+    <img src="/img/companies/critical-software.png" alt="Critical Software">
+  </div>
+  <div class="experience-content">
+    <h3>Junior Software Engineer (Internship)</h3>
+    <p class="company">Critical Software</p>
+    <p class="dates">Jul 2017 – Sep 2017 · 3 mos</p>
+    <ul>
+      <li>Contributed to high-reliability backend systems for critical systems.</li>
+      <li>Participated in code reviews and quality assurance processes, improving system stability ahead of production release.</li>
     </ul>
   </div>
 </div>
@@ -132,9 +148,9 @@ I work directly with executive stakeholders to align scalable solutions with org
   <div class="experience-content">
     <h3>Chief Financial Officer (CFO)</h3>
     <p class="company">Scientia FCUP Junior Enterprise</p>
-    <p class="dates">Apr 2017 – Apr 2018 · 1 yr</p>
+    <p class="dates">Apr 2017 – Apr 2018 · 1 yr 1 mo</p>
     <ul>
-      <li>Led financial planning for a student consultancy company, managing annual budget and delivering client projects</li>
+      <li>Led financial planning for a student consultancy company, managing the annual budget and delivering client projects.</li>
       <li>Managed a multidisciplinary team developing web and mobile applications for real clients.</li>
       <li>Supported strategic decision-making and helped scale the enterprise’s impact within the academic and local community.</li>
     </ul>
@@ -160,28 +176,12 @@ I work directly with executive stakeholders to align scalable solutions with org
 <div class="experience-item">
   <div class="experience-logo">
     <!-- <span class="logo-placeholder">CS</span> -->
-    <img src="/img/companies/critical-software.png" alt="Critical Software">
-  </div>
-  <div class="experience-content">
-    <h3>Junior Software Engineer (Internship)</h3>
-    <p class="company">Critical Software</p>
-    <p class="dates">Jul 2017 – Sep 2017 · 3 mos</p>
-    <ul>
-      <li>Contributed to high-reliability backend systems for critical systems.</li>
-      <li>Participated in code reviews and quality assurance processes, improving system stability ahead of production release.</li>
-    </ul>
-  </div>
-</div>
-
-<div class="experience-item">
-  <div class="experience-logo">
-    <!-- <span class="logo-placeholder">CS</span> -->
     <img src="/img/companies/goritex.png" alt="Uniformes Goritex">
   </div>
   <div class="experience-content">
     <h3>Production Assistant</h3>
     <p class="company">Uniformes Goritex</p>
-    <p class="dates">Jun 2014 - Sep 2015 · 1 yr 4 mos</p>
+    <p class="dates">Jun 2014 – Sep 2015 · 1 yr 4 mos</p>
     <ul>
       <li>Supported daily operations on production line, contributing to on-time delivery.</li>
     </ul>
