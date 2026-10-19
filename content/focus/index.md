@@ -1,6 +1,6 @@
 ---
 title: "Focus"
-description: "AI automation, observability, and high-impact engineering — highlights from 9+ years helping companies grow smarter."
+description: "Getting AI and automation into production, and keeping them alive there. What I work on and write about."
 aliases: ["/projects/"]
 showDate: false
 showReadingTime: false
@@ -11,40 +11,44 @@ showAuthor: false
 showPagination: false
 ---
 
-## What I Can Help With
+## What I work on
 
 <div class="services-grid">
 
 <div class="service-card">
-  <span class="service-icon">🚀</span>
-  <h3>Engineering Management</h3>
-  <p>Support engineering teams with stronger leadership, better execution, and clearer technical direction. Help organizations scale delivery, improve collaboration, and grow team capabilities.</p>
+  <span class="service-icon">01</span>
+  <h3>AI that survives production</h3>
+  <p>Most AI pilots work in the demo. The hard part is the day after: what happens when the model is slow, wrong or down, and who finds out first. Those are the questions worth answering before your customers do.</p>
 </div>
 
 <div class="service-card">
-  <span class="service-icon">🤖</span>
-  <h3>AI Agents & Automation</h3>
-  <p>Design and implement AI agents and workflow automation that eliminate manual work and scale with your business. From strategy to production-ready systems.</p>
+  <span class="service-icon">02</span>
+  <h3>Automation with a business case</h3>
+  <p>Start from the process that hurts, not from the model. Find the few workflows where automation pays back, get the data under them right, and build those well.</p>
 </div>
 
 <div class="service-card">
-  <span class="service-icon">📊</span>
-  <h3>Observability & Monitoring</h3>
-  <p>Build observability into your systems so you can see what's happening, catch issues before your customers do, and make data-driven decisions.</p>
+  <span class="service-icon">03</span>
+  <h3>Engineering teams in the agent era</h3>
+  <p>How roles, reviews and delivery change when agents write part of the code, and how to lead a team through it without losing quality or people.</p>
 </div>
 
 </div>
 
 ---
 
+## Compare notes
+
+Most of what I write here starts as a conversation with someone building with AI: what broke, what held up, what they would do differently. If you're working through something similar, I'd like to hear about it.
+
 <div class="cta-section">
 
-## Let's Talk
+## Say hello
 
-Tell me about your challenges, and let's explore how I can help.
+Questions, disagreements with a post, or a story from your own team. I read every message.
 
-{{< button href="mailto:hello@mcorte.com" target="_self" >}}
-Get in Touch →
+{{< button href="mailto:hello@mcorte.com?subject=Hello" target="_self" >}}
+Write to me →
 {{< /button >}}
 
 </div>
