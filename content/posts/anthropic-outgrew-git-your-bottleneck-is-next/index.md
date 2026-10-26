@@ -1,7 +1,7 @@
 ---
 title: "Anthropic Just Outgrew Git. Your Bottleneck Is Next."
-date: 2026-10-27
-draft: true
+date: 2026-10-26
+draft: false
 description: "Anthropic moved its main codebase off Git after daily merges went from about 2,500 to over 30,000 in four months. You're not Anthropic. But the lesson applies to every team using AI to write code: the slow part is no longer writing it."
 tags: ["AI-Assisted Coding", "Engineering Leadership", "Developer Productivity", "Code Review", "CI/CD"]
 categories: ["Engineering Leadership"]
