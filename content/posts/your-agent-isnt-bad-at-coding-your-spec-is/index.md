@@ -1,7 +1,7 @@
 ---
 title: "Your Agent Isn't Bad at Coding. Your Spec Is."
-date: 2026-11-02
-draft: true
+date: 2026-11-01
+draft: false
 description: "AI coding agents do exactly what you ask and guess the rest. A good spec isn't a long document. It's five short things: the outcome, the context it can't guess, the limits, how you'll check it, and when it should stop and ask."
 tags: ["AI Agents", "Engineering Leadership", "AI-Assisted Coding", "Specifications", "Code Review"]
 categories: ["AI Agents in Production"]
