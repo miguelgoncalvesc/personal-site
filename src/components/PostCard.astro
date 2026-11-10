@@ -4,8 +4,10 @@ import { category, coverOf, formatDate, readingTime, type Post } from "../lib/po
 interface Props { post: Post }
 const { post } = Astro.props;
 const cover = coverOf(post);
+// Matched by the search box on /posts.
+const searchText = [post.data.title, post.data.description, category(post), ...post.data.tags].join(" ").toLowerCase();
 ---
-<a class="card" href={`/posts/${post.id}/`} data-category={category(post)}>
+<a class="card" href={`/posts/${post.id}/`} data-category={category(post)} data-id={post.id} data-search={searchText}>
   {cover ? (
     <div class="cover"><Image src={cover} alt="" width={900} loading="lazy" /></div>
   ) : (

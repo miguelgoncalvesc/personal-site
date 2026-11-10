@@ -285,3 +285,11 @@ footer { padding-block: 24px 28px }
 .links .linkcard small { display: block; font: 500 10.5px/1.6 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent) }
 .links .linkcard.featured { background: var(--tray) }
 .xp-row { background: var(--surface); border-radius: 22px; display: flex; align-items: center; gap: 16px; padding: 16px 18px; flex-wrap: wrap }
+
+/* search box on /posts */
+.search { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 440px; height: 48px; padding: 0 18px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--meta); font-size: 17px }
+.search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft) }
+.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: var(--ink); font: 400 15.5px/1.4 var(--sans) }
+.search input::placeholder { color: var(--meta) }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
+.empty { text-align: center; margin: 24px auto 0 }
