@@ -1,0 +1,22 @@
+name: Scheduled rebuild
+
+# Posts dated in the future are left out at build time. Rebuilding once a day
+# publishes them on their date. Needs a Vercel Deploy Hook URL saved as the
+# repository secret VERCEL_DEPLOY_HOOK; without it this job does nothing.
+on:
+  schedule:
+    - cron: "10 0 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "VERCEL_DEPLOY_HOOK is not set; skipping."; exit 0; fi
+          curl -fsS -X POST "$HOOK"

@@ -1,0 +1,21 @@
+---
+// Analytics only loads after the visitor accepts. The choice is remembered.
+---
+<div class="cookie" id="cookieBanner" role="dialog" aria-labelledby="cookieTitle" hidden>
+  <h2 id="cookieTitle">Cookies</h2>
+  <p>This site uses analytics cookies to understand visits and improve the experience. <a href="/privacy/">Privacy Policy</a></p>
+  <div class="row">
+    <button class="btn" id="cookieReject" type="button">Reject</button>
+    <button class="btn solid" id="cookieAccept" type="button">Accept</button>
+  </div>
+</div>
+<script is:inline>
+  (function () {
+    var consent = window.mcorteCookieConsent;
+    var banner = document.getElementById("cookieBanner");
+    if (!consent || !banner || consent.get()) return;
+    banner.hidden = false;
+    document.getElementById("cookieAccept").addEventListener("click", function () { consent.accept(); banner.hidden = true; });
+    document.getElementById("cookieReject").addEventListener("click", function () { consent.reject(); banner.hidden = true; });
+  })();
+</script>

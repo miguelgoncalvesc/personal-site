@@ -1,0 +1,129 @@
+---
+import "../styles/global.css";
+import Icons from "../components/Icons.astro";
+import Icon from "../components/Icon.astro";
+import ContactPanel from "../components/ContactPanel.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import { NAV, SITE } from "../site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Social preview image path. Defaults to the generated card for this page. */
+  image?: string;
+  /** One-screen pages (home, links): no contact panel under the content. */
+  bare?: boolean;
+  article?: { published: Date; tags: string[] };
+  noindex?: boolean;
+}
+
+const { title, description = SITE.description, image, bare = false, article, noindex = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/?$/, "/");
+const canonical = new URL(path, SITE.url).href;
+const pageTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline}`;
+const ogSlug = path === "/" ? "home" : path.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+const ogImage = new URL(image ?? `/og/${ogSlug}.png`, SITE.url).href;
+const isCurrent = (href: string) => path.startsWith(href);
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="author" content={SITE.name} />
+    <meta name="theme-color" content="#0F172A" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:title" content={title ?? SITE.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    {article && <meta property="article:published_time" content={article.published.toISOString()} />}
+    {article?.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? SITE.name} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/index.xml" />
+    <link rel="preload" href="/fonts/Fraunces.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script is:inline>
+      // Dark by default; the nav toggle's choice is remembered.
+      try {
+        if (localStorage.getItem("mcorte-theme") === "light") document.documentElement.dataset.theme = "light";
+      } catch (e) {}
+    </script>
+    <script is:inline define:vars={{ gaId: SITE.gaId }}>
+      // Google Analytics, gated on cookie consent.
+      (function () {
+        if (!gaId) return;
+        var key = "mcorte-cookie-consent";
+        function read() { try { return localStorage.getItem(key); } catch (e) { return null; } }
+        function write(value) { try { localStorage.setItem(key, value); } catch (e) {} }
+        function load() {
+          if (window.__mcorteAnalyticsLoaded) return;
+          window.__mcorteAnalyticsLoaded = true;
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { dataLayer.push(arguments); };
+          window.gtag("js", new Date());
+          window.gtag("config", gaId, { anonymize_ip: true });
+          var script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
+          document.head.appendChild(script);
+        }
+        window.mcorteCookieConsent = {
+          accept: function () { write("accepted"); load(); },
+          reject: function () { write("rejected"); },
+          get: read,
+        };
+        if (read() === "accepted") load();
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body id="top">
+    <Icons />
+    <header class="nav">
+      <nav class="pillbar" aria-label="Main">
+        <a class="brand" href="/" aria-label={`${SITE.name}, home`}>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M52.78 44A24 24 0 1 1 50.39 16.57" /><path d="M20 42V31a6 6 0 0 1 12 0v11M32 31a6 6 0 0 1 12 0v11" /><circle cx="56" cy="30" r="3.6" fill="#60A5FA" stroke="none" /></svg>
+        </a>
+        <span class="sep"></span>
+        {NAV.map((item) => <a class="link" href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>{item.label}</a>)}
+        <span class="sep"></span>
+        <button id="themeBtn" type="button" aria-label="Switch between light and dark"><Icon name="sun" class="sun" /><Icon name="moon" class="moon" /></button>
+        <a class="link" href={bare ? "/contact/" : "#contact"} aria-label="Say hi"><Icon name="chat" /><span class="hi-label">Say hi</span></a>
+      </nav>
+    </header>
+
+    <main><div class:list={["view", { home: bare }]}><slot /></div></main>
+    {!bare && <ContactPanel />}
+    {SITE.gaId && <CookieBanner />}
+
+    <script>
+      const root = document.documentElement;
+      document.getElementById("themeBtn")?.addEventListener("click", () => {
+        const theme = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = theme;
+        try {
+          localStorage.setItem("mcorte-theme", theme);
+        } catch {}
+        document.dispatchEvent(new CustomEvent("themechange", { detail: theme }));
+      });
+    </script>
+  </body>
+</html>

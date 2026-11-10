@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import Avatar from "../components/Avatar.astro";
+import Icon from "../components/Icon.astro";
+import { getPosts } from "../lib/posts";
+import { SITE } from "../site";
+
+// Link-in-bio page. Entries with an empty url are hidden.
+const [latest] = await getPosts();
+const links = [
+  { title: "Blog", url: "/posts/", icon: "doc" },
+  { title: "LinkedIn", url: SITE.social.linkedin, icon: "linkedin" },
+  { title: "X", url: SITE.social.x, icon: "x" },
+  { title: "Substack", url: SITE.social.substack, icon: "mail" },
+  { title: "Say hi", url: "/contact/", icon: "chat" },
+].filter((link) => link.url);
+---
+<Base title="Links" description="Miguel Côrte — blog, LinkedIn and everything else in one place." bare>
+  <section class="wrap links center">
+    <Avatar size={112} eager />
+    <h1>@mcorte</h1>
+    <p class="tagline" style="margin:0 0 12px">Engineering · Automation · Applied AI</p>
+    {latest && (
+      <a class="linkcard featured" href={`/posts/${latest.id}/`}><span><small>Latest post</small>{latest.data.title}</span></a>
+    )}
+    {links.map((link) => (
+      <a class="linkcard" href={link.url} target={link.url.startsWith("http") ? "_blank" : undefined} rel={link.url.startsWith("http") ? "noopener" : undefined}><Icon name={link.icon} />{link.title}</a>
+    ))}
+  </section>
+</Base>

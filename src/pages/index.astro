@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Avatar from "../components/Avatar.astro";
+import Icon from "../components/Icon.astro";
+import { getPosts } from "../lib/posts";
+import { SITE } from "../site";
+
+// Landing page: one screen, no scroll. Everything else lives on its own page.
+const latest = (await getPosts()).slice(0, 5);
+const tints = ["#1D4ED8", "#0F172A", "#1E3A8A", "#334155", "#3B82F6"];
+const year = new Date().getFullYear();
+---
+<Base bare>
+  <section class="hero wrap center">
+    <Avatar eager />
+    <div class="idpill"><i class="live"></i><b>{SITE.name}</b><span>{SITE.pill}</span></div>
+    <h1 class="display">Getting AI into production, <em>and keeping it alive there.</em></h1>
+    <p class="tagline">{SITE.tagline}</p>
+    <p class="eyebrow dock-label">Latest posts</p>
+    <div class="dock">
+      {latest.map((post, i) => (
+        <a class="tile" href={`/posts/${post.id}/`} style={`background:${tints[i % tints.length]}`} aria-label={post.data.title}>
+          <Icon name={post.data.icon ?? "doc"} /><span class="tip">{post.data.title}</span>
+        </a>
+      ))}
+      <span class="sep"></span>
+      <a class="tile mail" href="/contact/" aria-label="Say hi"><Icon name="mail" /><span class="tip">Say hi</span></a>
+    </div>
+  </section>
+  <div class="wrap homebar eyebrow">
+    <span>© {year} {SITE.name}</span>
+    <span class="r">
+      <a href={SITE.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={SITE.social.x} target="_blank" rel="noopener">X</a>
+      <a href={SITE.social.github} target="_blank" rel="noopener">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+    </span>
+  </div>
+</Base>

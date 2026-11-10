@@ -1,0 +1,33 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { focus } from "../data/about";
+const description = "Getting AI and automation into production, and keeping them alive there. What I work on and write about.";
+---
+<Base title="Focus" description={description}>
+  <section class="wrap page-head">
+    <div class="head center">
+      <p class="eyebrow">Focus</p>
+      <h1 class="display">Into production, <em>and alive there.</em></h1>
+      <p class="lead">{description}</p>
+    </div>
+    <div class="tray three">
+      {focus.map((area, i) => (
+        <div class="cell center">
+          <span class:list={["badge", { blue: i === focus.length - 1 }]}><Icon name={area.icon} /></span>
+          <h3>{area.title}</h3>
+          <p>{area.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+  <section class="block wrap">
+    <div class="head center" style="margin-bottom:0">
+      <p class="eyebrow">Compare notes</p>
+      <h2 class="statement">Most of what I write starts as a conversation with someone building with AI: <span class="muted">what broke, what held up, what they would do differently.</span></h2>
+      <p class="lead">If you’re working through something similar, tell me what you need and how I can help.</p>
+      <ContactForm />
+    </div>
+  </section>
+</Base>

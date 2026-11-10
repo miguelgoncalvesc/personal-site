@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+import { SITE } from "../site";
+const year = new Date().getFullYear();
+---
+<footer class="wrap" id="contact">
+  <div class="contact center">
+    <div class="idpill"><i class="live"></i><b>I read every message</b></div>
+    <h2 class="display">Say hello, <em>compare notes.</em></h2>
+    <div class="row">
+      <a class="btn solid" href={`mailto:${SITE.email}`}><Icon name="mail" />{SITE.email}</a>
+      <a class="btn" href={SITE.social.linkedin} target="_blank" rel="noopener">LinkedIn <Icon name="ur" /></a>
+    </div>
+    <div class="socials">
+      <a href={SITE.social.x} target="_blank" rel="noopener" aria-label="X"><Icon name="x" /></a>
+      <a href={SITE.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      <a href={SITE.social.github} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" /></a>
+      <a href="/index.xml" aria-label="RSS feed"><Icon name="rss" /></a>
+    </div>
+    <div class="legal eyebrow">
+      <span>© {year} {SITE.name}</span>
+      <span class="r"><a href="/privacy/">Privacy</a><a href="/links/">Links</a></span>
+      <span class="r">Back to top<a class="top" href="#top" aria-label="Back to top"><Icon name="up" /></a></span>
+    </div>
+    <div class="watermark" aria-hidden="true">{SITE.name}</div>
+  </div>
+</footer>

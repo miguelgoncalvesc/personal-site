@@ -1,0 +1,81 @@
+---
+import Icon from "./Icon.astro";
+// Posts to /api/contact, which emails the message with Resend.
+---
+<form class="tray msg" id="msgForm" novalidate>
+  <div class="cell">
+    <div class="pair">
+      <label class="field"><span class="eyebrow">Name</span><input name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name" /></label>
+      <label class="field"><span class="eyebrow">Email</span><input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@company.com" /></label>
+      <label class="field"><span class="eyebrow">Company · optional</span><input name="company" type="text" autocomplete="organization" maxlength="120" placeholder="Where you work" /></label>
+    </div>
+    <fieldset class="field pick">
+      <legend class="eyebrow">What can I help with?</legend>
+      <label class="chip"><input type="radio" name="topic" value="AI in production" />AI in production</label>
+      <label class="chip"><input type="radio" name="topic" value="Automation with a business case" />Automation with a business case</label>
+      <label class="chip"><input type="radio" name="topic" value="Engineering teams and agents" />Engineering teams and agents</label>
+      <label class="chip"><input type="radio" name="topic" value="Something else" />Something else</label>
+    </fieldset>
+    <fieldset class="field pick">
+      <legend class="eyebrow">What kind of help?</legend>
+      <label class="chip"><input type="radio" name="kind" value="A second opinion" />A second opinion</label>
+      <label class="chip"><input type="radio" name="kind" value="A hands-on project" />A hands-on project</label>
+      <label class="chip"><input type="radio" name="kind" value="A workshop or talk" />A workshop or talk</label>
+      <label class="chip"><input type="radio" name="kind" value="Not sure yet" />Not sure yet</label>
+    </fieldset>
+    <label class="field"><span class="eyebrow">Tell me more</span><textarea name="message" rows="5" required maxlength="5000" placeholder="What are you trying to get done, and where is it stuck?"></textarea></label>
+    <!-- Spam trap: people never see or fill this field. -->
+    <div class="trap" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="send">
+      <p class="note" id="msgNote" role="status">Goes straight to my inbox. I read every message.</p>
+      <button class="btn solid" type="submit">Send message <Icon name="right" /></button>
+    </div>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById("msgForm") as HTMLFormElement | null;
+  const note = document.getElementById("msgNote");
+  if (form && note) {
+    const opened = Date.now();
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const say = (text: string, ok = false) => {
+      note.textContent = text;
+      note.classList.toggle("ok", ok);
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      let firstBad: HTMLInputElement | HTMLTextAreaElement | null = null;
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input:not([type=radio]), textarea").forEach((field) => {
+        const bad = !field.checkValidity();
+        field.classList.toggle("bad", bad);
+        if (bad && !firstBad) firstBad = field;
+      });
+      if (firstBad) {
+        const field = firstBad as HTMLInputElement;
+        say(field.type === "email" && field.value ? "That email address looks incomplete." : "Fill in your name, email and a message.");
+        field.focus();
+        return;
+      }
+
+      button.disabled = true;
+      say("Sending…");
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...data, elapsed: Date.now() - opened }),
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        form.reset();
+        say("Sent. Thank you, I’ll reply by email.", true);
+      } catch {
+        say("That didn’t send. Try again, or email hello@mcorte.com directly.");
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
