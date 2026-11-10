@@ -5,7 +5,7 @@ The contact form sends email through [Resend](https://resend.com/).
 
 ## Local development
 
-Requires Node 20 or newer.
+Requires Node 22 or newer.
 
 ```bash
 npm install
