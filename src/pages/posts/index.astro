@@ -15,6 +15,11 @@ const plural = (n: number) => `${n} post${n === 1 ? "" : "s"}`;
       <p class="eyebrow">Posts</p>
       <h1 class="display">Notes from <em>production.</em></h1>
       <p class="lead">{description}</p>
+      <label class="search" for="postSearch">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        <span class="sr-only">Search posts</span>
+        <input id="postSearch" type="search" placeholder="Search posts" autocomplete="off" spellcheck="false" />
+      </label>
       <div class="row" id="filters" role="group" aria-label="Filter by category">
         <button class="chip" type="button" aria-pressed="true" data-category="">All<i>{posts.length}</i></button>
         {categories.map((name) => <button class="chip" type="button" aria-pressed="false" data-category={name}>{name}<i>{countOf(name)}</i></button>)}
@@ -24,23 +29,43 @@ const plural = (n: number) => `${n} post${n === 1 ? "" : "s"}`;
     <div class="grid" id="postsGrid">
       {posts.map((post) => <PostCard post={post} />)}
     </div>
+    <p class="muted" id="noResults" hidden>No posts match your search.</p>
   </section>
 </Base>
 
 <script>
   const filters = document.getElementById("filters");
+  const search = document.getElementById("postSearch") as HTMLInputElement | null;
   const count = document.getElementById("count");
+  const empty = document.getElementById("noResults");
   const cards = [...document.querySelectorAll<HTMLElement>("#postsGrid .card")];
+  let wanted = "";
+
+  const normalize = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  function apply() {
+    const terms = normalize(search?.value ?? "").split(/\s+/).filter(Boolean);
+    let shown = 0;
+    for (const card of cards) {
+      const haystack = normalize(card.dataset.search ?? "");
+      const inCategory = wanted === "" || card.dataset.category === wanted;
+      card.hidden = !inCategory || !terms.every((term) => haystack.includes(term));
+      if (!card.hidden) shown++;
+    }
+    if (count) count.textContent = `${shown} post${shown === 1 ? "" : "s"}`;
+    if (empty) empty.hidden = shown > 0;
+  }
+
   filters?.addEventListener("click", (event) => {
     const button = (event.target as HTMLElement).closest("button");
     if (!button) return;
-    const wanted = button.dataset.category ?? "";
-    let shown = 0;
-    for (const card of cards) {
-      card.hidden = wanted !== "" && card.dataset.category !== wanted;
-      if (!card.hidden) shown++;
-    }
+    wanted = button.dataset.category ?? "";
     filters.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
-    if (count) count.textContent = `${shown} post${shown === 1 ? "" : "s"}`;
+    apply();
+  });
+
+  search?.addEventListener("input", apply);
+  search?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { search.value = ""; apply(); }
   });
 </script>
