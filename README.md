@@ -1,42 +1,43 @@
 # Miguel Côrte — Personal Site
 
-A personal website built with [Hugo](https://gohugo.io/) and the [Blowfish](https://blowfish.page/) theme.
+[mcorte.com](https://mcorte.com), built with [Astro](https://astro.build/) and deployed on [Vercel](https://vercel.com/).
+The contact form sends email through [Resend](https://resend.com/).
 
-## Local Development
+## Local development
 
-### Prerequisites
-
-- [Hugo](https://gohugo.io/installation/) (extended edition recommended)
-- [Git](https://git-scm.com/)
-
-### Repository layout
-
-Only source is tracked: content, config, layouts, assets, `static/`, and the `themes/blowfish` theme. Hugo output directories `public/` and `resources/` are ignored (regenerate with `hugo` after cloning). If you previously staged `public/`, remove it from the index once: `git rm -r --cached public` (then commit).
-
-### Setup
+Requires Node 20 or newer.
 
 ```bash
-# Start the development server
-hugo server -D
+npm install
 ```
 
-The site will be available at `http://localhost:1313/`.
-
-### Creating New Blog Posts
-
-Simply create a markdown file and push — Hugo + GitHub Actions will auto-convert it to a styled HTML page.
-
-**Option 1 — Local:**
 ```bash
-hugo new posts/my-new-post/index.md
-# Edit the file, commit, push → auto-deploys
+npm run dev
 ```
 
-**Option 2 — Directly on GitHub:**
-1. Go to your repo on GitHub
-2. Navigate to `content/posts/`
-3. Create a new folder (e.g. `my-new-post`)
-4. Inside it, create `index.md` with this template:
+The site runs at `http://localhost:4321/`. Drafts and future-dated posts show up in `dev` only.
+
+```bash
+npm run build
+```
+
+## Where things live
+
+| Path | What it is |
+|---|---|
+| `src/content/posts/<slug>/index.md` | One folder per post, images next to it |
+| `src/pages/` | One file per page: home, posts, about, focus, contact, links, privacy |
+| `src/data/about.ts` | Experience, education, skills and the three Focus areas |
+| `src/site.ts` | Name, tagline, social links, analytics ID, comments settings |
+| `src/styles/global.css` | Brand kit tokens (colours, fonts) and all styles |
+| `src/pages/api/contact.ts` | Contact form endpoint (the only server code) |
+| `src/pages/og/[slug].png.ts` | Social preview cards, generated at build time |
+| `public/` | Fonts, favicons, company logos |
+| `drafts/` | Unpublished posts, not built |
+
+## Writing a post
+
+Create `src/content/posts/my-new-post/index.md`:
 
 ```markdown
 ---
@@ -46,33 +47,72 @@ draft: false
 description: "A short summary for previews and SEO."
 tags: ["AI", "Automation"]
 categories: ["AI & Automation"]
-showTableOfContents: true
 ---
 
-Your markdown content here. Use **bold**, *italic*, `code`, lists, images — anything.
+Your markdown content here.
 ```
 
-5. Commit → GitHub Actions auto-builds and deploys the HTML page
+Optional front matter:
+
+- `cover: "./figure.png"`: image for the post card. Defaults to the first image in the post.
+- `coverPhrase: "a few words"`: text for the card when the post has no image.
+- `icon: "layers"`: icon in the home page dock. Names are in `src/components/Icons.astro`.
+- `images: ["figure.png"]`: use this image as the social preview instead of the generated card.
+- `showTableOfContents: false`: hide the "On this page" list.
+
+A post dated in the future is published by the daily rebuild on that date (see "Scheduled posts").
+Mermaid code blocks and `> [!Note] Title` callouts are supported.
 
 ## Deployment
 
-The site auto-deploys to GitHub Pages via GitHub Actions on every push to `main`.
+Vercel builds and deploys every push: `main` goes to production, other branches get a preview URL.
 
-### First-time GitHub Setup
+### One-time setup
 
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Under **Source**, select `gh-pages` branch
-4. The site will be live at `https://<username>.github.io/<repo-name>/`
+**1. Vercel**
 
-### Update `baseURL`
+1. Import this repository in Vercel. It detects Astro; keep the defaults.
+2. In Settings → Environment Variables, add `RESEND_API_KEY` (from step 4).
+3. In Settings → Domains, add `mcorte.com` and `www.mcorte.com`. Vercel shows the DNS records to create.
 
-Before deploying, update the `baseURL` in `config/_default/hugo.toml` to match your GitHub Pages URL:
+**2. Cloudflare (DNS)**
 
-```toml
-baseURL = "https://<username>.github.io/<repo-name>/"
-```
+The domain stays registered at GoDaddy; only its DNS moves to Cloudflare.
+
+1. Add `mcorte.com` as a site in Cloudflare (free plan). Review the records it imports from GoDaddy.
+2. In GoDaddy, replace the nameservers with the two Cloudflare gives you.
+3. In Cloudflare DNS, create the records Vercel asked for in step 1, set to "DNS only" (grey cloud).
+   Delete the old GitHub Pages records (`185.199.x.x` A records, any CNAME to `github.io`).
+
+**3. Cloudflare Email Routing (receive mail at hello@mcorte.com)**
+
+1. In Cloudflare → Email → Email Routing, enable it and let it add its MX and TXT records.
+2. Add your personal inbox as a destination address and confirm the verification email.
+3. Create the rule `hello@mcorte.com` → that destination.
+
+Email Routing only receives. Replying *as* hello@mcorte.com from your inbox needs a separate "send mail as" setup.
+
+**4. Resend (send the contact form)**
+
+1. Add the domain `mcorte.com` in Resend and create the DNS records it lists in Cloudflare.
+   They sit on `resend._domainkey` and the `send` subdomain, so they don't clash with Email Routing.
+2. Wait for Resend to show the domain as verified.
+3. Create an API key with sending access, save it in Vercel as `RESEND_API_KEY`, and redeploy.
+
+The form posts to `/api/contact`, which emails `hello@mcorte.com` with the visitor's address as reply-to.
+`CONTACT_TO` and `CONTACT_FROM` override the defaults (see `.env.example`).
+
+**5. Scheduled posts**
+
+1. In Vercel → Settings → Git → Deploy Hooks, create a hook for `main`.
+2. Save its URL as the GitHub repository secret `VERCEL_DEPLOY_HOOK`.
+
+`.github/workflows/scheduled-rebuild.yml` calls it once a day.
+
+**6. After the switch**
+
+Turn off GitHub Pages in the repository settings. Comments (giscus) keep working: they are tied to this repository, not to the host.
 
 ## License
 
-Content © Miguel Côrte. Theme by [Blowfish](https://blowfish.page/).
+Content is © Miguel Côrte. Fonts in `public/fonts` are under the SIL Open Font License.

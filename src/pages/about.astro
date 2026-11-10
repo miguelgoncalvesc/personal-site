@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import RoleRow from "../components/RoleRow.astro";
+import { education, experience, languages, skills, stats } from "../data/about";
+import { SITE } from "../site";
+---
+<Base title="About" description="Associate Director of Automation at Maxima Apparel with 9+ years in software, specializing in AI-driven automation, agent-based workflow orchestration, and observability.">
+  <section class="wrap page-head">
+    <div class="head center">
+      <p class="eyebrow">About</p>
+      <h1 class="statement" style="font-size:clamp(1.9rem,4.8vw,3.1rem)">I’m Miguel Côrte, Associate Director of Automation at Maxima Apparel, <span class="muted">with nine years in software and a focus on AI-driven automation.</span></h1>
+    </div>
+    <div class="tray stats">
+      {stats.map((s) => <div class="cell center stat"><b>{s.value}</b><span class="eyebrow">{s.label}</span></div>)}
+    </div>
+    <div class="center" style="gap:18px;margin-top:48px">
+      <p class="lead">I collaborate with cross-functional teams across product, operations, and engineering to identify and implement high-impact automation opportunities, and to standardize intelligent automation practices and workflows across global teams in multiple countries.</p>
+      <p class="lead">I work directly with executive stakeholders to align scalable solutions with organizational objectives. What motivates me is building reliable, observable, and continuously improving systems, and driving the adoption of AI tools and agent-based workflow orchestration to turn automation into a core operational practice.</p>
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="head center">
+      <p class="eyebrow">Experience</p>
+      <h2 class="display" style="font-size:clamp(2rem,4.6vw,2.9rem)">Nine years of <span class="muted">shipping systems.</span></h2>
+    </div>
+    <div class="tray xp">
+      {experience.map((job, i) => (
+        <details open={i === 0}>
+          <summary><RoleRow {...job} /></summary>
+          <ul>{job.points.map((point) => <li>{point}</li>)}</ul>
+        </details>
+      ))}
+    </div>
+    <div class="row" style="margin-top:24px"><a class="btn" href={SITE.social.linkedin} target="_blank" rel="noopener">Full résumé on LinkedIn <Icon name="ur" /></a></div>
+
+    <p class="eyebrow sub">Education</p>
+    <div class="tray xp">
+      {education.map((school) => <div class="xp-row"><RoleRow {...school} /></div>)}
+    </div>
+
+    <p class="eyebrow sub">Skills &amp; expertise</p>
+    <div class="tray groups">
+      {skills.map((group) => (
+        <div class="cell"><h3>{group.title}</h3><div class="chips">{group.items.map((item) => <span class="chip">{item}</span>)}</div></div>
+      ))}
+    </div>
+
+    <p class="eyebrow sub">Languages</p>
+    <div class="row">{languages.map((l) => <span class="chip">{l.name}<i>{l.level}</i></span>)}</div>
+  </section>
+</Base>

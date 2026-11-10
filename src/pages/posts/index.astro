@@ -1,0 +1,46 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+import { category, getPosts } from "../../lib/posts";
+
+const posts = await getPosts();
+const description = "Thoughts on AI automation, observability, CI/CD, and scaling engineering teams.";
+const categories = [...new Set(posts.map(category))];
+const countOf = (name: string) => posts.filter((post) => category(post) === name).length;
+const plural = (n: number) => `${n} post${n === 1 ? "" : "s"}`;
+---
+<Base title="Posts" description={description}>
+  <section class="wrap page-head">
+    <div class="head center">
+      <p class="eyebrow">Posts</p>
+      <h1 class="display">Notes from <em>production.</em></h1>
+      <p class="lead">{description}</p>
+      <div class="row" id="filters" role="group" aria-label="Filter by category">
+        <button class="chip" type="button" aria-pressed="true" data-category="">All<i>{posts.length}</i></button>
+        {categories.map((name) => <button class="chip" type="button" aria-pressed="false" data-category={name}>{name}<i>{countOf(name)}</i></button>)}
+      </div>
+      <p class="eyebrow" id="count">{plural(posts.length)}</p>
+    </div>
+    <div class="grid" id="postsGrid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</Base>
+
+<script>
+  const filters = document.getElementById("filters");
+  const count = document.getElementById("count");
+  const cards = [...document.querySelectorAll<HTMLElement>("#postsGrid .card")];
+  filters?.addEventListener("click", (event) => {
+    const button = (event.target as HTMLElement).closest("button");
+    if (!button) return;
+    const wanted = button.dataset.category ?? "";
+    let shown = 0;
+    for (const card of cards) {
+      card.hidden = wanted !== "" && card.dataset.category !== wanted;
+      if (!card.hidden) shown++;
+    }
+    filters.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+    if (count) count.textContent = `${shown} post${shown === 1 ? "" : "s"}`;
+  });
+</script>

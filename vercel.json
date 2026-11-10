@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/projects/:path*", "destination": "/focus/", "permanent": true },
+    { "source": "/tags/:path*", "destination": "/posts/", "permanent": true },
+    { "source": "/categories/:path*", "destination": "/posts/", "permanent": true },
+    { "source": "/authors/:path*", "destination": "/about/", "permanent": true },
+    { "source": "/posts/index.xml", "destination": "/index.xml", "permanent": true },
+    { "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true }
+  ]
+}

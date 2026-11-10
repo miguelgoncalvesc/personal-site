@@ -1,0 +1,7 @@
+---
+import { Image } from "astro:assets";
+import photo from "../assets/author-dark.jpg";
+interface Props { size?: number; alt?: string; eager?: boolean }
+const { size = 164, alt = "Miguel Côrte", eager = false } = Astro.props;
+---
+<span class="avatar"><Image src={photo} alt={alt} width={size * 2} height={size * 2} loading={eager ? "eager" : "lazy"} /></span>

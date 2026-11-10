@@ -1,0 +1,27 @@
+{
+  "name": "mcorte-site",
+  "private": true,
+  "type": "module",
+  "version": "2.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/vercel": "^11.0.20",
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^7.4.8",
+    "mermaid": "^12.3.0",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
+    "unist-util-visit": "^5.2.0"
+  }
+}

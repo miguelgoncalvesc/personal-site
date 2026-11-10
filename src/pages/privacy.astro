@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+---
+<Base title="Privacy Policy" description="Privacy and cookie information for mcorte.com.">
+  <div class="wrap">
+    <div class="prose plain">
+      <h1 class="display" style="font-size:clamp(2rem,5vw,3rem)">Privacy Policy</h1>
+      <h2>Privacy</h2>
+      <p>This website collects limited usage data to understand how visitors use the site and improve the content and experience over time.</p>
+      <h2>Analytics</h2>
+      <p>If you accept analytics cookies, this site may use Google Analytics to measure visits, page views, and general navigation patterns.</p>
+      <h2>Cookies</h2>
+      <p>This site stores a consent preference so it can remember whether you accepted or rejected analytics. Analytics is only enabled after consent. It also remembers whether you chose the light or dark theme.</p>
+      <h2>Contact form</h2>
+      <p>When you send a message through the contact form, the details you enter (name, email, company and message) are sent to me by email so I can reply. The email is delivered through Resend. The details are not used for anything else.</p>
+      <h2>Contact</h2>
+      <p>If you have questions about privacy or data use, contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    </div>
+  </div>
+</Base>

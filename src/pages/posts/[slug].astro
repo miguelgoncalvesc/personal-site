@@ -1,0 +1,164 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Avatar from "../../components/Avatar.astro";
+import Icon from "../../components/Icon.astro";
+import { category, formatDate, getPosts, postImage, readingTime, type Post } from "../../lib/posts";
+import { SITE } from "../../site";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props { post: Post; newer?: Post; older?: Post }
+const { post, newer, older } = Astro.props;
+const { Content, headings } = await render(post);
+const toc = post.data.showTableOfContents ? headings.filter((h) => h.depth === 2) : [];
+const url = new URL(`/posts/${post.id}/`, SITE.url).href;
+// A post can ship its own social image via `images:` in the front matter.
+const own = post.data.images?.[0] ? postImage(post, post.data.images[0]) : undefined;
+const giscus = SITE.giscus.repoId && SITE.giscus.categoryId ? SITE.giscus : null;
+---
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  image={own?.src}
+  article={{ published: post.data.date, tags: post.data.tags }}
+>
+  <article class="wrap">
+    <header class="article-head center">
+      <a class="back" href="/posts/"><Icon name="left" />All posts</a>
+      <p class="eyebrow">{category(post)} · {formatDate(post.data.date)} · {readingTime(post)} min read</p>
+      <h1>{post.data.title}</h1>
+      {post.data.description && <p class="lead">{post.data.description}</p>}
+      <div class="byline"><Avatar size={34} alt="" />{SITE.name}</div>
+    </header>
+
+    <div class="cols">
+      <div class="prose">
+        <Content />
+
+        {post.data.tags.length > 0 && <div class="chips">{post.data.tags.map((tag) => <span class="chip">{tag}</span>)}</div>}
+
+        {SITE.subscribe.url && (
+          <aside class="admonition subscribe">
+            <p class="admonition-title">Newsletter</p>
+            <h2>{SITE.subscribe.title}</h2>
+            <p>{SITE.subscribe.text}</p>
+            <a class="btn solid" href={SITE.subscribe.url} target="_blank" rel="noopener">{SITE.subscribe.button}</a>
+          </aside>
+        )}
+
+        <div class="engage">
+          <a class="btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener"><Icon name="linkedin" />Post on LinkedIn</a>
+          {giscus && <a class="btn" href="#comments"><Icon name="comment" />Comment</a>}
+        </div>
+      </div>
+
+      {toc.length > 0 && (
+        <aside class="toc" aria-label="On this page">
+          <p class="eyebrow">On this page</p>
+          {toc.map((h) => <a href={`#${h.slug}`}>{h.text}</a>)}
+        </aside>
+      )}
+    </div>
+
+    {giscus && (
+      <section class="comments" id="comments" aria-label="Comments"
+        data-repo={giscus.repo} data-repo-id={giscus.repoId} data-category={giscus.category} data-category-id={giscus.categoryId}
+        data-lang={giscus.lang} data-light={giscus.lightTheme} data-dark={giscus.darkTheme}>
+        <h2>Comments</h2>
+        <div class="giscus"></div>
+      </section>
+    )}
+
+    <nav class="tray pager" style="max-width:980px;margin-inline:auto" aria-label="More posts">
+      {older ? (
+        <a class="cell" href={`/posts/${older.id}/`}><span class="eyebrow">← Older</span><h3>{older.data.title}</h3></a>
+      ) : (
+        <a class="cell" href="/posts/"><span class="eyebrow">← All posts</span><h3>Notes from production</h3></a>
+      )}
+      {newer ? (
+        <a class="cell" href={`/posts/${newer.id}/`}><span class="eyebrow">Newer →</span><h3>{newer.data.title}</h3></a>
+      ) : (
+        <a class="cell" href="/posts/"><span class="eyebrow">All posts →</span><h3>Notes from production</h3></a>
+      )}
+    </nav>
+  </article>
+</Base>
+
+<script>
+  const isDark = () => document.documentElement.dataset.theme === "dark";
+
+  // Table of contents: highlight the section being read.
+  const tocLinks = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")];
+  if (tocLinks.length) {
+    const byId = new Map(tocLinks.map((link) => [decodeURIComponent(link.hash.slice(1)), link]));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          tocLinks.forEach((link) => link.classList.remove("on"));
+          byId.get(entry.target.id)?.classList.add("on");
+        }
+      },
+      { rootMargin: "-90px 0px -70% 0px" },
+    );
+    byId.forEach((_, id) => {
+      const heading = document.getElementById(id);
+      if (heading) observer.observe(heading);
+    });
+  }
+
+  // Mermaid diagrams: the library only loads on posts that have one.
+  const sources = [...document.querySelectorAll<HTMLElement>(".prose pre > code.language-mermaid, .prose pre[data-language=mermaid]")];
+  if (sources.length) {
+    const boxes = sources.map((code) => {
+      const pre = code.closest("pre")!;
+      const box = document.createElement("div");
+      box.className = "mermaid-box";
+      box.dataset.source = code.textContent ?? "";
+      pre.replaceWith(box);
+      return box;
+    });
+    const { default: mermaid } = await import("mermaid");
+    const draw = async () => {
+      mermaid.initialize({ startOnLoad: false, theme: isDark() ? "dark" : "neutral", fontFamily: "Inter, system-ui, sans-serif" });
+      for (const [i, box] of boxes.entries()) {
+        try {
+          const { svg } = await mermaid.render(`mermaid-${i}-${Date.now()}`, box.dataset.source ?? "");
+          box.innerHTML = svg;
+        } catch {
+          box.textContent = box.dataset.source ?? "";
+        }
+      }
+    };
+    await draw();
+    document.addEventListener("themechange", draw);
+  }
+
+  // Comments (giscus), kept in sync with the theme toggle.
+  const comments = document.getElementById("comments");
+  if (comments) {
+    const d = comments.dataset;
+    const theme = () => (isDark() ? d.dark! : d.light!);
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    const attrs: Record<string, string> = {
+      "data-repo": d.repo!, "data-repo-id": d.repoId!, "data-category": d.category!, "data-category-id": d.categoryId!,
+      "data-mapping": "pathname", "data-strict": "1", "data-reactions-enabled": "1", "data-emit-metadata": "0",
+      "data-input-position": "top", "data-lang": d.lang!, "data-loading": "lazy", "data-theme": theme(),
+    };
+    for (const [key, value] of Object.entries(attrs)) script.setAttribute(key, value);
+    comments.querySelector(".giscus")!.appendChild(script);
+    document.addEventListener("themechange", () => {
+      document.querySelector<HTMLIFrameElement>("iframe.giscus-frame")?.contentWindow?.postMessage({ giscus: { setConfig: { theme: theme() } } }, "https://giscus.app");
+    });
+  }
+</script>

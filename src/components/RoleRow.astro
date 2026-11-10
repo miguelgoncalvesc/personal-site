@@ -1,0 +1,7 @@
+---
+interface Props { logo: string; role: string; org: string; dates: string; current?: boolean }
+const { logo, role, org, dates, current } = Astro.props;
+---
+<span class="logo"><img src={`/img/companies/${logo}.png`} alt="" width="46" height="46" loading="lazy" /></span>
+<span class="who"><h3>{role}{current && <span class="now">● NOW</span>}</h3><p>{org}</p></span>
+<span class="dates">{dates}</span>
