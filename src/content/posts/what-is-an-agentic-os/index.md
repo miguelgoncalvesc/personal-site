@@ -7,6 +7,8 @@ tags: ["AI Agents", "Agentic OS", "Engineering Leadership", "AI Governance", "Ar
 categories: ["AI & Automation"]
 showTableOfContents: true
 icon: "layers"
+cover: ./agentic-os-house.png
+images: ["w48-agentic-os-og.png"]
 ---
 
 In ten weeks, Meta, OpenAI, Anthropic and xAI launched almost the same product: a personal agent with its own computer in the cloud that keeps working when you close the app. Meanwhile banks and law firms are being sold something else with a bigger name: an "agentic operating system".
